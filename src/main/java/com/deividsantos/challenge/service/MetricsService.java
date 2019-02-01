@@ -13,7 +13,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 
-public class Metrics {
+public class MetricsService {
 
     public Integer getAmountOfClients(List<String> lines) {
         List<Customer> customers = CustomerConstructor.takeCostumers(lines);
@@ -25,17 +25,23 @@ public class Metrics {
         return salesmen.size();
     }
 
-    public Integer getWorstSalesman(List<String> lines) {
-        return 0;
+    public String getWorstSalesman(List<String> lines) {
+        List<Salesman> salesmen = SalesmanConstructor.takeSalesmen(lines);
+        List<Sale> sales = SaleConstructor.takeSales(lines);
+        salesmen.forEach(salesman -> sales.stream()
+                .filter(sale -> sale.getSalesmanName().equalsIgnoreCase(salesman.getName()))
+                .forEach(sale -> salesman.setSalesAmount(salesman.getSalesAmount() + 1)));
+
+        return salesmen.stream()
+                .min(Comparator.comparing(Salesman::getSalesAmount))
+                .orElseThrow(() -> new RuntimeException("No salesmen found")).getName();
     }
 
     public String getMostExpensiveSale(List<String> lines) {
         List<Sale> sales = SaleConstructor.takeSales(lines);
         BigDecimal maxSaleValue = sales.stream()
-                .map(Sale::getItems)
-                .map(sumItemValues())
-                .sorted(Comparator.reverseOrder())
-                .findFirst()
+                .map(sumItemValues().compose(Sale::getItems))
+                .max(Comparator.naturalOrder())
                 .orElseThrow(RuntimeException::new);
 
         return sales.stream().filter(sale -> {

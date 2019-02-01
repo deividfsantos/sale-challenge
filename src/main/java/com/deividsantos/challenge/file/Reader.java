@@ -12,7 +12,7 @@ public class Reader extends FileBase {
     }
 
     public List<String> read(String file) {
-        File flatFile = new File(homeDirectory + FILE_PATH_INPUT + file);
+        File flatFile = new File(homeDirectory + FILE_PATH_INPUT + file + ".dat");
         try {
             return Files.readAllLines(flatFile.toPath());
         } catch (IOException e) {

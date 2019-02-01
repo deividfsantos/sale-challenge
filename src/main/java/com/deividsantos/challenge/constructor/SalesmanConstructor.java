@@ -13,7 +13,7 @@ public class SalesmanConstructor {
     private static final Integer CPF_INDEX = 1;
     private static final Integer NAME_INDEX = 2;
     private static final Integer SALARY_INDEX = 3;
-    private static final String SALESMAN_ID = "001";
+    private static final String SALESMAN_ID = "001ç";
 
 
     public static List<Salesman> takeSalesmen(List<String> inputFileLines) {

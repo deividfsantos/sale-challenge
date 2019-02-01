@@ -12,7 +12,7 @@ public class SaleConstructor {
     private static final Integer SALE_ID_INDEX = 1;
     private static final Integer ITEM_INDEX = 2;
     private static final Integer NAME_INDEX = 3;
-    private static final String SALE_ID = "003";
+    private static final String SALE_ID = "003ç";
 
     public static List<Sale> takeSales(List<String> inputFileLines) {
         List<String> saleLines = inputFileLines.stream()

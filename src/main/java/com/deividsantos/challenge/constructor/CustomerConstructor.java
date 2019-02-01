@@ -12,7 +12,7 @@ public class CustomerConstructor {
     private static final Integer CNPJ_INDEX = 1;
     private static final Integer NAME_INDEX = 2;
     private static final Integer AREA_INDEX = 3;
-    private static final String CUSTOMER_ID = "002";
+    private static final String CUSTOMER_ID = "002ç";
 
     public static List<Customer> takeCostumers(List<String> inputFileLines) {
         List<String> costumerLines = inputFileLines.stream()

@@ -7,11 +7,13 @@ public class Salesman {
     private String cpf;
     private String name;
     private BigDecimal salary;
+    private Integer salesAmount;
 
     private Salesman(SalesmanBuilder salesmanBuilder) {
         this.cpf = salesmanBuilder.cpf;
         this.name = salesmanBuilder.name;
         this.salary = salesmanBuilder.salary;
+        this.salesAmount = 0;
     }
 
     public String getCpf() {
@@ -36,6 +38,14 @@ public class Salesman {
 
     public void setSalary(BigDecimal salary) {
         this.salary = salary;
+    }
+
+    public Integer getSalesAmount() {
+        return salesAmount;
+    }
+
+    public void setSalesAmount(Integer salesAmount) {
+        this.salesAmount = salesAmount;
     }
 
     public static class SalesmanBuilder {
@@ -64,7 +74,6 @@ public class Salesman {
         }
 
     }
-
 
     @Override
     public String toString() {
