@@ -7,13 +7,10 @@ public class Item {
     private Long quantity;
     private BigDecimal price;
 
-    public Item() {
-    }
-
-    public Item(String id, Long quantity, BigDecimal price) {
-        this.id = id;
-        this.quantity = quantity;
-        this.price = price;
+    private Item(ItemBuilder itemBuilder) {
+        this.id = itemBuilder.id;
+        this.quantity = itemBuilder.quantity;
+        this.price = itemBuilder.price;
     }
 
     public String getId() {
@@ -38,6 +35,32 @@ public class Item {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public static class ItemBuilder {
+        private String id;
+        private Long quantity;
+        private BigDecimal price;
+
+        public ItemBuilder withId(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public ItemBuilder withQuantity(Long quantity) {
+            this.quantity = quantity;
+            return this;
+        }
+
+        public ItemBuilder withPrice(BigDecimal price) {
+            this.price = price;
+            return this;
+        }
+
+        public Item build() {
+            return new Item(this);
+        }
+
     }
 
     @Override

@@ -12,8 +12,8 @@ public class Reader extends FileBase {
     }
 
     public List<String> read(String file) {
+        File flatFile = new File(homeDirectory + FILE_PATH_INPUT + file);
         try {
-            File flatFile = new File(homeDirectory + FILE_PATH_INPUT + file);
             return Files.readAllLines(flatFile.toPath());
         } catch (IOException e) {
             throw new RuntimeException();

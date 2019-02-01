@@ -6,10 +6,10 @@ public class Customer {
     private String name;
     private String businessArea;
 
-    public Customer(String cnpj, String name, String businessArea) {
-        this.cnpj = cnpj;
-        this.name = name;
-        this.businessArea = businessArea;
+    private Customer(CustomerBuilder customerBuilder) {
+        this.cnpj = customerBuilder.cnpj;
+        this.name = customerBuilder.name;
+        this.businessArea = customerBuilder.businessArea;
     }
 
     public String getCnpj() {
@@ -34,6 +34,33 @@ public class Customer {
 
     public void setBusinessArea(String businessArea) {
         this.businessArea = businessArea;
+    }
+
+    public static class CustomerBuilder {
+
+        private String cnpj;
+        private String name;
+        private String businessArea;
+
+        public CustomerBuilder withCnpj(String cnpj) {
+            this.cnpj = cnpj;
+            return this;
+        }
+
+        public CustomerBuilder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public CustomerBuilder withBusinessArea(String businessArea) {
+            this.businessArea = businessArea;
+            return this;
+        }
+
+        public Customer build() {
+            return new Customer(this);
+        }
+
     }
 
     @Override

@@ -1,23 +1,25 @@
 package com.deividsantos.challenge.model;
 
+import java.util.List;
+
 public class Sale {
 
     private String saleId;
-    private Item item;
+    private List<Item> items;
     private String salesmanName;
 
-    public Sale(String saleId, Item item, String salesmanName) {
-        this.saleId = saleId;
-        this.item = item;
-        this.salesmanName = salesmanName;
+    private Sale(SaleBuilder saleBuilder) {
+        this.saleId = saleBuilder.saleId;
+        this.items = saleBuilder.items;
+        this.salesmanName = saleBuilder.salesmanName;
     }
 
-    public Item getItem() {
-        return item;
+    public List<Item> getItems() {
+        return items;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     public String getSaleId() {
@@ -36,11 +38,38 @@ public class Sale {
         this.salesmanName = salesmanName;
     }
 
+    public static class SaleBuilder {
+
+        private String saleId;
+        private List<Item> items;
+        private String salesmanName;
+
+        public SaleBuilder withId(String saleId) {
+            this.saleId = saleId;
+            return this;
+        }
+
+        public SaleBuilder withItems(List<Item> items) {
+            this.items = items;
+            return this;
+        }
+
+        public SaleBuilder withSalesmanName(String salesmanName) {
+            this.salesmanName = salesmanName;
+            return this;
+        }
+
+        public Sale build() {
+            return new Sale(this);
+        }
+
+    }
+
     @Override
     public String toString() {
         return "Sale{" +
                 "saleId='" + saleId + '\'' +
-                ", item=" + item +
+                ", item=" + items +
                 ", salesmanName='" + salesmanName + '\'' +
                 '}';
     }
