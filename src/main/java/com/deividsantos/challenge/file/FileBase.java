@@ -1,13 +1,11 @@
 package com.deividsantos.challenge.file;
 
-class FileBase {
+import java.io.File;
 
-    String homeDirectory;
-    static final String FILE_PATH_INPUT = "/data/in/";
-    static final String FILE_PATH_OUTPUT = "/data/out/";
+public class FileBase {
+    static final String FILE_PATH_INPUT = System.getProperty("user.home") + File.separator + "data" + File.separator + "in" + File.separator;
+    static final String FILE_PATH_OUTPUT = System.getProperty("user.home") + File.separator + "data" + File.separator + "out" + File.separator;
 
-    public FileBase() {
-        this.homeDirectory = System.getProperty("user.home");
-    }
-
+    static final String EXTENSION_INPUT = ".dat";
+    static final String EXTENSION_OUTPUT = ".done.dat";
 }

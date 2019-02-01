@@ -14,16 +14,9 @@ public class CustomerConstructor {
     private static final Integer AREA_INDEX = 3;
     private static final String CUSTOMER_ID = "002ç";
 
-    public static List<Customer> takeCostumers(List<String> inputFileLines) {
-        List<String> costumerLines = inputFileLines.stream()
+    public static List<Customer> takeCustomers(List<String> inputFileLines) {
+        return inputFileLines.stream()
                 .filter(line -> line.startsWith(CUSTOMER_ID))
-                .collect(Collectors.toList());
-        return buildCostumer(costumerLines);
-    }
-
-
-    public static List<Customer> buildCostumer(List<String> salesmanLines) {
-        return salesmanLines.stream()
                 .map(saleLine -> saleLine.split(SEPARATOR))
                 .map(buildCostumer())
                 .collect(Collectors.toList());

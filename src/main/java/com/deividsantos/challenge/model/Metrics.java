@@ -1,13 +1,15 @@
 package com.deividsantos.challenge.model;
 
+import java.util.List;
+
 public class Metrics {
 
     private Integer amountOfClients;
     private Integer amountOfSalesman;
-    private String mostExpensiveSale;
+    private List<String> mostExpensiveSale;
     private String worstSalesman;
 
-    public Metrics(Integer amountOfClients, Integer amountOfSalesman, String mostExpensiveSale, String worstSalesman) {
+    public Metrics(Integer amountOfClients, Integer amountOfSalesman, List<String> mostExpensiveSale, String worstSalesman) {
         this.amountOfClients = amountOfClients;
         this.amountOfSalesman = amountOfSalesman;
         this.mostExpensiveSale = mostExpensiveSale;
@@ -30,11 +32,11 @@ public class Metrics {
         this.amountOfSalesman = amountOfSalesman;
     }
 
-    public String getMostExpensiveSale() {
+    public List<String> getMostExpensiveSale() {
         return mostExpensiveSale;
     }
 
-    public void setMostExpensiveSale(String mostExpensiveSale) {
+    public void setMostExpensiveSale(List<String> mostExpensiveSale) {
         this.mostExpensiveSale = mostExpensiveSale;
     }
 
@@ -51,7 +53,7 @@ public class Metrics {
         return "\nMetrics:" +
                 "\nAmount of clients: " + amountOfClients +
                 "\nAmount of salesmen: " + amountOfSalesman +
-                "\nMost expensive sale: " + mostExpensiveSale +
-                "\nWorst salesman: " + worstSalesman;
+                "\nMost expensive sale ID: " + mostExpensiveSale +
+                "\nWorst salesman CNPJ: " + worstSalesman;
     }
 }

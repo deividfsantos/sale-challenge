@@ -15,16 +15,9 @@ public class SalesmanConstructor {
     private static final Integer SALARY_INDEX = 3;
     private static final String SALESMAN_ID = "001ç";
 
-
     public static List<Salesman> takeSalesmen(List<String> inputFileLines) {
-        List<String> salesmenLines = inputFileLines.stream()
+        return inputFileLines.stream()
                 .filter(line -> line.startsWith(SALESMAN_ID))
-                .collect(Collectors.toList());
-        return buildSalesmen(salesmenLines);
-    }
-
-    private static List<Salesman> buildSalesmen(List<String> salesmanLines) {
-        return salesmanLines.stream()
                 .map(saleLine -> saleLine.split(SEPARATOR))
                 .map(buildSalesman())
                 .collect(Collectors.toList());

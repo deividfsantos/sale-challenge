@@ -15,14 +15,8 @@ public class SaleConstructor {
     private static final String SALE_ID = "003ç";
 
     public static List<Sale> takeSales(List<String> inputFileLines) {
-        List<String> saleLines = inputFileLines.stream()
+        return inputFileLines.stream()
                 .filter(line -> line.startsWith(SALE_ID))
-                .collect(Collectors.toList());
-        return buildSale(saleLines);
-    }
-
-    private static List<Sale> buildSale(List<String> saleLines) {
-        return saleLines.stream()
                 .map(saleLine -> saleLine.split(SEPARATOR))
                 .map(buildSale())
                 .collect(Collectors.toList());

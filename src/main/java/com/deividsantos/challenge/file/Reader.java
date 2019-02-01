@@ -7,16 +7,13 @@ import java.util.List;
 
 public class Reader extends FileBase {
 
-    public Reader() {
-        super();
-    }
-
-    public List<String> read(String file) {
-        File flatFile = new File(homeDirectory + FILE_PATH_INPUT + file + ".dat");
+    public List<String> read(String fileName) {
+        File flatFile = new File(FILE_PATH_INPUT + fileName + EXTENSION_INPUT);
         try {
             return Files.readAllLines(flatFile.toPath());
         } catch (IOException e) {
-            throw new RuntimeException();
+            e.printStackTrace();
+            return null;
         }
     }
 

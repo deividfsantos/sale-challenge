@@ -4,36 +4,37 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.util.Collections;
 
 public class Writer extends FileBase {
 
-    public Writer() {
-        super();
-    }
-
-    public void writeOutputFile(String lines, String fileName) {
-        File flatFile = new File(homeDirectory + FILE_PATH_OUTPUT + fileName + ".done.dat");
+    public void writeOutputFile(String line, String fileName) {
+        File flatFile = new File(FILE_PATH_OUTPUT + fileName + EXTENSION_OUTPUT);
+        Path path = flatFile.toPath();
         try {
-            Files.write(flatFile.toPath(), Collections.singletonList(lines));
-        } catch (NoSuchFileException exception) {
-            createFile(fileName);
-            try {
-                Files.write(flatFile.toPath(), Collections.singletonList(lines));
-            } catch (IOException e) {
-                throw new RuntimeException();
-            }
+            Files.write(path, Collections.singletonList(line));
+        } catch (NoSuchFileException e) {
+            createFile(flatFile);
+            write(line, path);
         } catch (Exception e) {
-            throw new RuntimeException();
+            e.printStackTrace();
         }
     }
 
-    private void createFile(String fileName) {
-        File flatFile = new File(homeDirectory + FILE_PATH_OUTPUT + fileName + ".done.dat");
+    private void write(String lines, Path path) {
         try {
-            Files.createFile(flatFile.toPath());
+            Files.write(path, Collections.singletonList(lines));
         } catch (IOException e) {
-            throw new RuntimeException();
+            e.printStackTrace();
+        }
+    }
+
+    private void createFile(File file) {
+        try {
+            Files.createFile(file.toPath());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

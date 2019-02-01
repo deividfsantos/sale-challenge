@@ -5,26 +5,24 @@ import java.nio.file.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
+import static java.nio.file.StandardWatchEventKinds.*;
 
-public class Watcher {
+public class Watcher extends FileBase {
 
-    private Path path;
-    private WatchService watcher;
     private WatchKey watchKey;
+    private WatchService watcher;
+    private Path path;
 
     public Watcher() throws IOException, InterruptedException {
-        path = FileSystems.getDefault().getPath(System.getProperty("user.home"), "/data/in/");
+        path = FileSystems.getDefault().getPath(FILE_PATH_INPUT);
         watcher = path.getFileSystem().newWatchService();
-        path.register(watcher, ENTRY_CREATE, ENTRY_MODIFY);
+        path.register(watcher, ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE);
         watchKey = watcher.take();
     }
 
     public List<WatchEvent> watch() {
         return watchKey.pollEvents().stream()
-                .filter(event -> event.context().toString().endsWith(".dat"))
-                .filter(event -> event.kind().equals(ENTRY_MODIFY))
+                .filter(event -> event.context().toString().endsWith(EXTENSION_INPUT))
                 .collect(Collectors.toList());
     }
 }
