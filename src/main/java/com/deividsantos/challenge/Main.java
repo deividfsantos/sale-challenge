@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         Watcher watcher = new Watcher();
         SalesService salesService = new SalesService();
-        for (; ; ) {
+        while (true) {
             List<WatchEvent> events = watcher.watch();
             events.forEach(salesService::readEvent);
         }

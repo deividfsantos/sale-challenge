@@ -1,4 +1,4 @@
-package com.deividsantos.challenge.constructor;
+package com.deividsantos.challenge.parser;
 
 import com.deividsantos.challenge.model.Item;
 
@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ItemConstructor {
+public class ItemParser {
 
     private static final String ITEM_LIST_SEPARATOR = ",";
     private static final String ITEM_ATRIBUTES_SEPARATOR = "-";
@@ -15,15 +15,15 @@ public class ItemConstructor {
     private static final Integer QUANTITY_INDEX = 1;
     private static final Integer PRICE_INDEX = 2;
 
-    public static List<Item> buildItem(String line) {
+    public static List<Item> build(String line) {
         List<String> items = Arrays.asList(splitItemLine(line));
         return items.stream()
                 .map(item -> item.split(ITEM_ATRIBUTES_SEPARATOR))
-                .map(ItemConstructor::buildItem)
+                .map(ItemParser::build)
                 .collect(Collectors.toList());
     }
 
-    private static Item buildItem(String[] itemAtributes) {
+    private static Item build(String[] itemAtributes) {
         return new Item.ItemBuilder()
                 .withId(itemAtributes[ID_INDEX])
                 .withQuantity(Long.valueOf(itemAtributes[QUANTITY_INDEX]))

@@ -1,14 +1,14 @@
 package com.deividsantos.challenge.service;
 
-import com.deividsantos.challenge.constructor.CustomerConstructor;
-import com.deividsantos.challenge.constructor.SaleConstructor;
-import com.deividsantos.challenge.constructor.SalesmanConstructor;
 import com.deividsantos.challenge.file.Reader;
 import com.deividsantos.challenge.file.Writer;
 import com.deividsantos.challenge.model.Customer;
 import com.deividsantos.challenge.model.Metrics;
 import com.deividsantos.challenge.model.Sale;
 import com.deividsantos.challenge.model.Salesman;
+import com.deividsantos.challenge.parser.CustomerParser;
+import com.deividsantos.challenge.parser.SaleParser;
+import com.deividsantos.challenge.parser.SalesmanParser;
 
 import java.nio.file.WatchEvent;
 import java.util.List;
@@ -35,9 +35,9 @@ public class SalesService {
     }
 
     private Metrics buildMetrics(List<String> lines) {
-        List<Customer> customers = CustomerConstructor.takeCustomers(lines);
-        List<Salesman> salesmen = SalesmanConstructor.takeSalesmen(lines);
-        List<Sale> sales = SaleConstructor.takeSales(lines);
+        List<Customer> customers = CustomerParser.take(lines);
+        List<Salesman> salesmen = SalesmanParser.take(lines);
+        List<Sale> sales = SaleParser.take(lines);
         return getMetrics(customers, salesmen, sales);
     }
 
@@ -45,7 +45,7 @@ public class SalesService {
         MetricsService metrics = new MetricsService(customers, salesmen, sales);
         Integer amountOfClients = metrics.getAmountOfClients();
         Integer amountOfSalesman = metrics.getAmountOfSalesman();
-        List<String> mostExpensiveSale = metrics.getMostExpensiveSale();
+        String mostExpensiveSale = metrics.getMostExpensiveSale();
         String worstSalesman = metrics.getWorstSalesman();
         return new Metrics(amountOfClients, amountOfSalesman, mostExpensiveSale, worstSalesman);
     }

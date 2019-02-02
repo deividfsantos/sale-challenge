@@ -1,4 +1,4 @@
-package com.deividsantos.challenge.constructor;
+package com.deividsantos.challenge.parser;
 
 import com.deividsantos.challenge.model.Customer;
 import org.junit.Test;
@@ -9,11 +9,11 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.junit.Assert.assertEquals;
 
-public class CustomerConstructorTest {
+public class CustomerParserTest {
 
     @Test
     public void takeCustomersWithMiscLinesTest() {
-        List<Customer> customers = CustomerConstructor.takeCustomers(buildLines());
+        List<Customer> customers = CustomerParser.take(buildLines());
         assertEquals(2, customers.size());
         assertEquals("2345675434544345", customers.get(0).getCnpj());
         assertEquals("Rural", customers.get(0).getBusinessArea());
@@ -26,7 +26,7 @@ public class CustomerConstructorTest {
     @Test
     public void takeCustomersWithNoNameTest() {
         List<String> line = singletonList("002ç2345675434544345ççRural");
-        List<Customer> customers = CustomerConstructor.takeCustomers(line);
+        List<Customer> customers = CustomerParser.take(line);
         assertEquals(1, customers.size());
         assertEquals("2345675434544345", customers.get(0).getCnpj());
         assertEquals("Rural", customers.get(0).getBusinessArea());
@@ -36,7 +36,7 @@ public class CustomerConstructorTest {
     @Test
     public void takeCustomersWithNoCnpjTest() {
         List<String> line = singletonList("002çççRural");
-        List<Customer> customers = CustomerConstructor.takeCustomers(line);
+        List<Customer> customers = CustomerParser.take(line);
         assertEquals(1, customers.size());
         assertEquals("", customers.get(0).getCnpj());
         assertEquals("Rural", customers.get(0).getBusinessArea());
@@ -46,7 +46,7 @@ public class CustomerConstructorTest {
     @Test
     public void takeCustomersWithNoIdTest() {
         List<String> line = singletonList("çççRural");
-        List<Customer> customers = CustomerConstructor.takeCustomers(line);
+        List<Customer> customers = CustomerParser.take(line);
         assertEquals(0, customers.size());
     }
 

@@ -1,6 +1,5 @@
-package com.deividsantos.challenge.constructor;
+package com.deividsantos.challenge.parser;
 
-import com.deividsantos.challenge.model.Customer;
 import com.deividsantos.challenge.model.Sale;
 import org.junit.Test;
 
@@ -10,11 +9,11 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.junit.Assert.*;
 
-public class SaleConstructorTest {
+public class SaleParserTest {
 
     @Test
     public void takeSalesWithMiscLinesTest() {
-        List<Sale> sales = SaleConstructor.takeSales(buildLines());
+        List<Sale> sales = SaleParser.take(buildLines());
         assertEquals(2, sales.size());
         assertEquals("10", sales.get(0).getSaleId());
         assertEquals("Pedro", sales.get(0).getSalesmanName());
@@ -36,7 +35,7 @@ public class SaleConstructorTest {
     @Test
     public void takeSalesWithNoIdTest() {
         List<String> line = singletonList("003çç[1-10-100,2-30-2.50,3-40-3.10]çPedro");
-        List<Sale> sales = SaleConstructor.takeSales(line);
+        List<Sale> sales = SaleParser.take(line);
         assertEquals(1, sales.size());
         assertEquals("", sales.get(0).getSaleId());
         assertEquals("Pedro", sales.get(0).getSalesmanName());
@@ -46,7 +45,7 @@ public class SaleConstructorTest {
     @Test
     public void takeCustomersWithNoIdTest() {
         List<String> line = singletonList("çççPedro");
-        List<Sale> sales = SaleConstructor.takeSales(line);
+        List<Sale> sales = SaleParser.take(line);
         assertEquals(0, sales.size());
     }
 }
