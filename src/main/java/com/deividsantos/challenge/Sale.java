@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.nio.file.WatchEvent;
 import java.util.List;
 
-public class Main {
+public class Sale {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         Watcher watcher = new Watcher();

@@ -1,10 +1,6 @@
 package com.deividsantos.challenge.service;
 
-import com.deividsantos.challenge.model.Customer;
-import com.deividsantos.challenge.model.Item;
-import com.deividsantos.challenge.model.Sale;
-import com.deividsantos.challenge.model.Salesman;
-import org.junit.Before;
+import com.deividsantos.challenge.model.*;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -17,30 +13,48 @@ public class MetricsServiceTest {
 
     private MetricsService metricsService;
 
-    @Before
-    public void setup() {
-        metricsService = new MetricsService(buildCustomers(), buildSalesmen(), buildSale());
+    public MetricsServiceTest() {
+        this.metricsService = new MetricsService();
     }
 
     @Test
-    public void getAmountOfClientsTest() throws Exception {
-        assertEquals(Integer.valueOf(3), metricsService.getAmountOfClients());
+    public void buildAllMetricsTest() {
+        Metrics allMetrics = metricsService.build(buildCustomers(), buildSalesmen(), buildSale());
+        assertEquals(Integer.valueOf(3), allMetrics.getAmountOfClients());
+        assertEquals(Integer.valueOf(5), allMetrics.getAmountOfSalesmen());
+        assertEquals("030405020304", allMetrics.getWorstSalesman());
+        assertEquals("04", allMetrics.getMostExpensiveSale());
     }
 
     @Test
-    public void getAmountOfSalesmanTest() throws Exception {
-        assertEquals(Integer.valueOf(5), metricsService.getAmountOfSalesman());
+    public void buildAllMetricsToStringTest() {
+        Metrics allMetrics = metricsService.build(buildCustomers(), buildSalesmen(), buildSale());
+        assertEquals("\nMetrics:" +
+                        "\nAmount of clients: 3" +
+                        "\nAmount of salesmen: 5" +
+                        "\nMost expensive sale ID: 04" +
+                        "\nWorst salesman CNPJ: 030405020304",
+                allMetrics.toString());
     }
 
     @Test
-    public void getWorstSalesmanTest() throws Exception {
-        assertEquals("030405020304", metricsService.getWorstSalesman());
+    public void getAllMetricsWithLinesTeste(){
+        Metrics metricsWithLines = metricsService.getAll(buildLines());
+        assertEquals(Integer.valueOf(3), metricsWithLines.getAmountOfClients());
+        assertEquals(Integer.valueOf(2), metricsWithLines.getAmountOfSalesmen());
+        assertEquals("3245678865434", metricsWithLines.getWorstSalesman());
+        assertEquals("10", metricsWithLines.getMostExpensiveSale());
     }
 
-
     @Test
-    public void getMostExpensiveSaleTest() throws Exception {
-        assertEquals("04", metricsService.getMostExpensiveSale());
+    public void getAllMetricsWithLinesToStringTest() {
+        Metrics allMetrics = metricsService.getAll(buildLines());
+        assertEquals("\nMetrics:" +
+                        "\nAmount of clients: 3" +
+                        "\nAmount of salesmen: 2" +
+                        "\nMost expensive sale ID: 10" +
+                        "\nWorst salesman CNPJ: 3245678865434",
+                allMetrics.toString());
     }
 
     private List<Salesman> buildSalesmen() {
@@ -132,5 +146,15 @@ public class MetricsServiceTest {
                 .withQuantity(Long.valueOf(name))
                 .build();
         return asList(item1, item2, item3);
+    }
+
+    private List<String> buildLines() {
+        return asList(("001ç1234567891234çPedroç50000\n" +
+                "001ç3245678865434çPauloç40000.99\n" +
+                "002ç2345675434544345çJose da SilvaçRural\n" +
+                "002ç2345675433444345çEduardo PereiraçRural\n" +
+                "002ç2145675433444345çEduardo SilvaçIndustria\n" +
+                "003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çPedro\n" +
+                "003ç08ç[1-34-10,2-33-1.50,3-40-0.10]çPaulo").split("\n"));
     }
 }
