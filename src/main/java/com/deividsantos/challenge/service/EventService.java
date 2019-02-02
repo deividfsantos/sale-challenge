@@ -13,17 +13,17 @@ import com.deividsantos.challenge.parser.SalesmanParser;
 import java.nio.file.WatchEvent;
 import java.util.List;
 
-public class SalesService {
+public class EventService {
 
     private Writer writer;
     private Reader reader;
 
-    public SalesService() {
+    public EventService() {
         this.writer = new Writer();
         this.reader = new Reader();
     }
 
-    public void readEvent(WatchEvent event) {
+    public void process(WatchEvent event) {
         String modifiedFileName = getFileName(event);
         List<String> lines = reader.read(modifiedFileName);
         Metrics metrics = buildMetrics(lines);
@@ -38,15 +38,8 @@ public class SalesService {
         List<Customer> customers = CustomerParser.take(lines);
         List<Salesman> salesmen = SalesmanParser.take(lines);
         List<Sale> sales = SaleParser.take(lines);
-        return getMetrics(customers, salesmen, sales);
+        MetricsService metricsService = new MetricsService(customers, salesmen, sales);
+        return metricsService.getAll();
     }
 
-    private Metrics getMetrics(List<Customer> customers, List<Salesman> salesmen, List<Sale> sales) {
-        MetricsService metrics = new MetricsService(customers, salesmen, sales);
-        Integer amountOfClients = metrics.getAmountOfClients();
-        Integer amountOfSalesman = metrics.getAmountOfSalesman();
-        String mostExpensiveSale = metrics.getMostExpensiveSale();
-        String worstSalesman = metrics.getWorstSalesman();
-        return new Metrics(amountOfClients, amountOfSalesman, mostExpensiveSale, worstSalesman);
-    }
 }

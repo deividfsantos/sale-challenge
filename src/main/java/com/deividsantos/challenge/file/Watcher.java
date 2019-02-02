@@ -3,6 +3,7 @@ package com.deividsantos.challenge.file;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static java.nio.file.StandardWatchEventKinds.*;
@@ -17,6 +18,7 @@ public class Watcher extends FileBase {
         path = FileSystems.getDefault().getPath(FILE_PATH_INPUT);
         watcher = path.getFileSystem().newWatchService();
         path.register(watcher, ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE);
+        watchKey = watcher.poll(2, TimeUnit.SECONDS);
         watchKey = watcher.take();
     }
 

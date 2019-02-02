@@ -1,13 +1,9 @@
 package com.deividsantos.challenge.service;
 
-import com.deividsantos.challenge.model.Customer;
-import com.deividsantos.challenge.model.Item;
-import com.deividsantos.challenge.model.Sale;
-import com.deividsantos.challenge.model.Salesman;
+import com.deividsantos.challenge.model.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.function.Function;
 
 import static java.util.Comparator.comparing;
 
@@ -23,35 +19,45 @@ public class MetricsService {
         this.sales = sales;
     }
 
-    public Integer getAmountOfClients() {
+    public Metrics getAll() {
+        Integer amountOfClients = getAmountOfClients();
+        Integer amountOfSalesman = getAmountOfSalesman();
+        String mostExpensiveSale = getMostExpensiveSale();
+        String worstSalesman = getWorstSalesman();
+        return new Metrics(amountOfClients, amountOfSalesman, mostExpensiveSale, worstSalesman);
+    }
+
+    protected Integer getAmountOfClients() {
         return customers.size();
     }
 
-    public Integer getAmountOfSalesman() {
+    protected Integer getAmountOfSalesman() {
         return salesmen.size();
     }
 
-    public String getWorstSalesman() {
-//        salesmen.forEach(salesman -> sales.stream()
-//                .filter(sale -> sale.getSalesmanName().equalsIgnoreCase(salesman.getName()))
-//                .forEach(sale -> salesman.setSalesAmount(salesman.getSalesAmount() + 1)));
-//
-//        return salesmen.stream()
-//                .min(comparing(Salesman::getSalesAmount))
-//                .orElse(new Salesman.SalesmanBuilder().build())
-//                .getCpf();
-        return null;
+    protected String getWorstSalesman() {
+        return salesmen.stream()
+                .min(comparing(this::sumSalesmanSales))
+                .map(Salesman::getCpf)
+                .orElse(null);
     }
 
-    public String getMostExpensiveSale() {
+    protected String getMostExpensiveSale() {
         return sales.stream()
-                .max(comparing(sumItemsValues()))
+                .max(comparing(this::sumSaleItemsValue))
                 .map(Sale::getSaleId)
                 .orElse(null);
     }
 
-    private Function<Sale, BigDecimal> sumItemsValues() {
-        return sale -> sale.getItems().stream()
+    private BigDecimal sumSalesmanSales(Salesman salesman) {
+        return sales.stream()
+                .filter(sale -> sale.getSalesmanName().equalsIgnoreCase(salesman.getName()))
+                .map(this::sumSaleItemsValue)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    private BigDecimal sumSaleItemsValue(Sale sale) {
+        return sale.getItems().stream()
                 .map(Item::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
