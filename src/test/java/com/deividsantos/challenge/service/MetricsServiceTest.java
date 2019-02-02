@@ -57,6 +57,29 @@ public class MetricsServiceTest {
                 allMetrics.toString());
     }
 
+    @Test
+    public void getAllMetricsWithWrongLinesToStringTest() {
+        Metrics allMetrics = metricsService.getAll(buildWrongLines());
+        assertEquals("\nMetrics:" +
+                        "\nAmount of clients: 0" +
+                        "\nAmount of salesmen: 0" +
+                        "\nMost expensive sale ID: There are no sales." +
+                        "\nWorst salesman CNPJ: There are no salesmen.",
+                allMetrics.toString());
+    }
+
+
+    @Test
+    public void getAllMetricsWithWrongItemLinesToStringTest() {
+        Metrics allMetrics = metricsService.getAll(buildWrongItemLines());
+        assertEquals("\nMetrics:" +
+                        "\nAmount of clients: 0" +
+                        "\nAmount of salesmen: 0" +
+                        "\nMost expensive sale ID: There are no sales." +
+                        "\nWorst salesman CNPJ: There are no salesmen.",
+                allMetrics.toString());
+    }
+
     private List<Salesman> buildSalesmen() {
         Salesman salesman = new Salesman.SalesmanBuilder()
                 .withCpf("030405020304")
@@ -156,5 +179,25 @@ public class MetricsServiceTest {
                 "002ç2145675433444345çEduardo SilvaçIndustria\n" +
                 "003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çPedro\n" +
                 "003ç08ç[1-34-10,2-33-1.50,3-40-0.10]çPaulo").split("\n"));
+    }
+
+    private List<String> buildWrongLines() {
+        return asList(("001ç1234567fasf891234çPedroç50000\n" +
+                "001ç324567asf8865434çPauloç40000.99\n" +
+                "0s02ç234567sad5434544345çJasasgose da SilvaçRural\n" +
+                "002ç23456754sffas33444345çEdusaardo PereiraçRural\n" +
+                "002ç2145sfsaf675433444345çEduarsgdggssso SilvaçIndustria\n" +
+                "003ç1231224wqe0ç[1-10-100,2-30-2.50,safsafasg3-40-3.10]çPedro\n" +
+                "003çwqewe08ç[sfaf1-34-10,2-33-1.50,3gggsa-40-0.10]çPaulo").split("\n"));
+    }
+
+    private List<String> buildWrongItemLines() {
+        return asList(("001ç1234567fasf891234çPedroç50000\n" +
+                "001ç324567asf8865434çPauloç40000.99\n" +
+                "0s02ç234567sad5434544345çJasasgose da SilvaçRural\n" +
+                "002ç23456754sffas33444345çEdusaardo PereiraçRural\n" +
+                "002ç2145sfsaf675433444345çEduarsgdggssso SilvaçIndustria\n" +
+                "003ç10ç[1-10-100,2-30-2.50,safsafasg3-40-3.10]çPedro\n" +
+                "003ç08ç[sfaf1-34-10,2-33-1.50,3gggsa-40-0.10]çPaulo").split("\n"));
     }
 }

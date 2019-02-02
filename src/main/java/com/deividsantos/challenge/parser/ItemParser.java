@@ -9,16 +9,18 @@ import java.util.stream.Collectors;
 
 public class ItemParser {
 
-    private static final String ITEM_LIST_SEPARATOR = ",";
-    private static final String ITEM_ATRIBUTES_SEPARATOR = "-";
+    private static final String LIST_SEPARATOR = ",";
+    private static final String ATRIBUTES_SEPARATOR = "-";
     private static final Integer ID_INDEX = 0;
     private static final Integer QUANTITY_INDEX = 1;
     private static final Integer PRICE_INDEX = 2;
+    private static final String EMPTY_STRING = "";
+    private static final String BRACKETS_REGEX = "\\[|\\]";
 
-    public static List<Item> build(String line) {
-        List<String> items = Arrays.asList(splitItemLine(line));
+    public static List<Item> parse(String line) {
+        List<String> items = Arrays.asList(removeBrackets(line));
         return items.stream()
-                .map(item -> item.split(ITEM_ATRIBUTES_SEPARATOR))
+                .map(item -> item.split(ATRIBUTES_SEPARATOR))
                 .map(ItemParser::build)
                 .collect(Collectors.toList());
     }
@@ -31,7 +33,7 @@ public class ItemParser {
                 .build();
     }
 
-    private static String[] splitItemLine(String line) {
-        return line.replaceAll("\\[|\\]", "").split(ITEM_LIST_SEPARATOR);
+    private static String[] removeBrackets(String line) {
+        return line.replaceAll(BRACKETS_REGEX, EMPTY_STRING).split(LIST_SEPARATOR);
     }
 }

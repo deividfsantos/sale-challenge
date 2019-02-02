@@ -27,7 +27,7 @@ public class SaleParser {
     private static Function<Matcher, Sale> build() {
         return atributes -> new Sale.SaleBuilder()
                 .withId(atributes.group(SALE_ID_INDEX))
-                .withItems(ItemParser.build(atributes.group(ITEM_INDEX)))
+                .withItems(ItemParser.parse(atributes.group(ITEM_INDEX)))
                 .withSalesmanName(atributes.group(NAME_INDEX))
                 .build();
     }

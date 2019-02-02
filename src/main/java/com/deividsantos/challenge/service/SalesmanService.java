@@ -14,12 +14,11 @@ class SalesmanService {
         return salesmen.size();
     }
 
-
     static String getWorstSalesman(List<Salesman> salesmen, List<Sale> sales) {
         return salesmen.stream()
                 .min(comparing(salesman -> SalesmanService.sumSalesmanSales(salesman, sales)))
                 .map(Salesman::getCpf)
-                .orElse(null);
+                .orElse("There are no salesmen.");
     }
 
     private static BigDecimal sumSalesmanSales(Salesman salesman, List<Sale> sales) {

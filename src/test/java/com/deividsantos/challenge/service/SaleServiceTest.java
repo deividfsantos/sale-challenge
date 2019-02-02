@@ -15,7 +15,7 @@ public class SaleServiceTest {
     @Test
     public void getMostExpensiveSaleTest() throws Exception {
         assertEquals("04",SaleService.getMostExpensiveSale(buildSale()));
-        assertEquals(null,SaleService.getMostExpensiveSale(new ArrayList<>()));
+        assertEquals("There are no sales.",SaleService.getMostExpensiveSale(new ArrayList<>()));
     }
 
     private List<Sale> buildSale() {

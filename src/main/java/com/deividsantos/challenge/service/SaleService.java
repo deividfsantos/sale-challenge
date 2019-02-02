@@ -13,7 +13,7 @@ class SaleService {
         return sales.stream()
                 .max(comparing(SaleService::sumSaleItemsValue))
                 .map(Sale::getSaleId)
-                .orElse(null);
+                .orElse("There are no sales.");
     }
 
     private static BigDecimal sumSaleItemsValue(Sale sale) {

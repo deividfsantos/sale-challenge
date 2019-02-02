@@ -21,9 +21,9 @@ public class SalesmanServiceTest {
     @Test
     public void getWorstSalesman() throws Exception {
         assertEquals("030405020304", SalesmanService.getWorstSalesman(buildSalesmen(), buildSale()));
-        assertEquals(null, SalesmanService.getWorstSalesman(new ArrayList<>(), new ArrayList<>()));
+        assertEquals("There are no salesmen.", SalesmanService.getWorstSalesman(new ArrayList<>(), new ArrayList<>()));
         assertEquals("030405020304", SalesmanService.getWorstSalesman(buildSalesmen(), new ArrayList<>()));
-        assertEquals(null, SalesmanService.getWorstSalesman(new ArrayList<>(), buildSale()));
+        assertEquals("There are no salesmen.", SalesmanService.getWorstSalesman(new ArrayList<>(), buildSale()));
 
     }
 
