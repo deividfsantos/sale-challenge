@@ -3,15 +3,15 @@ package com.deividsantos.challenge.model;
 public class Metrics {
 
     private Integer amountOfClients;
-    private Integer amountOfSalesman;
+    private Integer amountOfSalesmen;
     private String mostExpensiveSale;
     private String worstSalesman;
 
-    public Metrics(Integer amountOfClients, Integer amountOfSalesman, String mostExpensiveSale, String worstSalesman) {
-        this.amountOfClients = amountOfClients;
-        this.amountOfSalesman = amountOfSalesman;
-        this.mostExpensiveSale = mostExpensiveSale;
-        this.worstSalesman = worstSalesman;
+    public Metrics(MetricsBuilder metricsBuilder) {
+        this.amountOfClients = metricsBuilder.amountOfClients;
+        this.amountOfSalesmen = metricsBuilder.amountOfSalesman;
+        this.mostExpensiveSale = metricsBuilder.mostExpensiveSale;
+        this.worstSalesman = metricsBuilder.worstSalesman;
     }
 
     public Integer getAmountOfClients() {
@@ -22,12 +22,12 @@ public class Metrics {
         this.amountOfClients = amountOfClients;
     }
 
-    public Integer getAmountOfSalesman() {
-        return amountOfSalesman;
+    public Integer getAmountOfSalesmen() {
+        return amountOfSalesmen;
     }
 
-    public void setAmountOfSalesman(Integer amountOfSalesman) {
-        this.amountOfSalesman = amountOfSalesman;
+    public void setAmountOfSalesmen(Integer amountOfSalesmen) {
+        this.amountOfSalesmen = amountOfSalesmen;
     }
 
 
@@ -47,11 +47,44 @@ public class Metrics {
         this.worstSalesman = worstSalesman;
     }
 
+    public static class MetricsBuilder {
+
+        private Integer amountOfClients;
+        private Integer amountOfSalesman;
+        private String mostExpensiveSale;
+        private String worstSalesman;
+
+        public MetricsBuilder withAmountOfClientes(Integer amountOfClients) {
+            this.amountOfClients = amountOfClients;
+            return this;
+        }
+
+
+        public MetricsBuilder withAmountOfSalesmen(Integer amountOfSalesmen) {
+            this.amountOfSalesman = amountOfSalesmen;
+            return this;
+        }
+
+        public MetricsBuilder withMostExpensiveSale(String mostExpensiveSale) {
+            this.mostExpensiveSale = mostExpensiveSale;
+            return this;
+        }
+
+        public MetricsBuilder withWorstSalesman(String worstSalesman) {
+            this.worstSalesman = worstSalesman;
+            return this;
+        }
+
+        public Metrics build() {
+            return new Metrics(this);
+        }
+    }
+
     @Override
     public String toString() {
         return "\nMetrics:" +
                 "\nAmount of clients: " + amountOfClients +
-                "\nAmount of salesmen: " + amountOfSalesman +
+                "\nAmount of salesmen: " + amountOfSalesmen +
                 "\nMost expensive sale ID: " + mostExpensiveSale +
                 "\nWorst salesman CNPJ: " + worstSalesman;
     }

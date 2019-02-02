@@ -12,6 +12,7 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         Watcher watcher = new Watcher();
         EventService eventService = new EventService();
+        //TODO: VER SE TEM ALGUMA MANEIRA DE TIRAR ESSE WHILE
         while (true) {
             List<WatchEvent> events = watcher.watch();
             events.forEach(eventService::process);

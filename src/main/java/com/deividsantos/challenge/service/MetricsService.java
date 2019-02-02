@@ -7,42 +7,43 @@ import java.util.List;
 
 import static java.util.Comparator.comparing;
 
-public class MetricsService {
+class MetricsService {
 
     private List<Customer> customers;
     private List<Salesman> salesmen;
     private List<Sale> sales;
 
-    public MetricsService(List<Customer> customers, List<Salesman> salesmen, List<Sale> sales) {
+    MetricsService(List<Customer> customers, List<Salesman> salesmen, List<Sale> sales) {
         this.customers = customers;
         this.salesmen = salesmen;
         this.sales = sales;
     }
 
-    public Metrics getAll() {
-        Integer amountOfClients = getAmountOfClients();
-        Integer amountOfSalesman = getAmountOfSalesman();
-        String mostExpensiveSale = getMostExpensiveSale();
-        String worstSalesman = getWorstSalesman();
-        return new Metrics(amountOfClients, amountOfSalesman, mostExpensiveSale, worstSalesman);
+    Metrics getAll() {
+        return new Metrics.MetricsBuilder()
+                .withAmountOfClientes(getAmountOfClients())
+                .withAmountOfSalesmen(getAmountOfSalesman())
+                .withMostExpensiveSale(getMostExpensiveSale())
+                .withWorstSalesman(getWorstSalesman())
+                .build();
     }
 
-    protected Integer getAmountOfClients() {
+    Integer getAmountOfClients() {
         return customers.size();
     }
 
-    protected Integer getAmountOfSalesman() {
+    Integer getAmountOfSalesman() {
         return salesmen.size();
     }
 
-    protected String getWorstSalesman() {
+    String getWorstSalesman() {
         return salesmen.stream()
                 .min(comparing(this::sumSalesmanSales))
                 .map(Salesman::getCpf)
                 .orElse(null);
     }
 
-    protected String getMostExpensiveSale() {
+    String getMostExpensiveSale() {
         return sales.stream()
                 .max(comparing(this::sumSaleItemsValue))
                 .map(Sale::getSaleId)

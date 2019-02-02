@@ -2,13 +2,11 @@ package com.deividsantos.challenge.service;
 
 import com.deividsantos.challenge.file.Reader;
 import com.deividsantos.challenge.file.Writer;
-import com.deividsantos.challenge.model.Customer;
 import com.deividsantos.challenge.model.Metrics;
-import com.deividsantos.challenge.model.Sale;
-import com.deividsantos.challenge.model.Salesman;
 import com.deividsantos.challenge.parser.CustomerParser;
 import com.deividsantos.challenge.parser.SaleParser;
 import com.deividsantos.challenge.parser.SalesmanParser;
+import com.deividsantos.challenge.type.Extension;
 
 import java.nio.file.WatchEvent;
 import java.util.List;
@@ -31,15 +29,14 @@ public class EventService {
     }
 
     private String getFileName(WatchEvent event) {
-        return event.context().toString().replace(".dat", "");
+        return event.context().toString().replace(Extension.INPUT.get(), "");
     }
 
     private Metrics buildMetrics(List<String> lines) {
-        List<Customer> customers = CustomerParser.take(lines);
-        List<Salesman> salesmen = SalesmanParser.take(lines);
-        List<Sale> sales = SaleParser.take(lines);
-        MetricsService metricsService = new MetricsService(customers, salesmen, sales);
-        return metricsService.getAll();
+        return new MetricsService(CustomerParser.take(lines),
+                SalesmanParser.take(lines),
+                SaleParser.take(lines))
+                .getAll();
     }
 
 }
