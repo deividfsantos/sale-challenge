@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 public class SalesmanParserTest {
     @Test
     public void takeSalesmenWithMiscLinesTest() {
-        List<Salesman> salesmen = SalesmanParser.take(buildLines());
+        List<Salesman> salesmen = SalesmanParser.parse(buildLines());
         assertEquals(2, salesmen.size());
         assertEquals("1234567891234", salesmen.get(0).getCpf());
         assertEquals("Pedro", salesmen.get(0).getName());
@@ -36,17 +36,14 @@ public class SalesmanParserTest {
     @Test
     public void takeSalesmenWithNoCpfTest() {
         List<String> line = singletonList("001ççPedroç50000");
-        List<Salesman> salesmen = SalesmanParser.take(line);
-        assertEquals(1, salesmen.size());
-        assertEquals("", salesmen.get(0).getCpf());
-        assertEquals("Pedro", salesmen.get(0).getName());
-        assertEquals(BigDecimal.valueOf(50000), salesmen.get(0).getSalary());
+        List<Salesman> salesmen = SalesmanParser.parse(line);
+        assertEquals(0, salesmen.size());
     }
 
     @Test
     public void takeSalesmenWithNoIdTest() {
         List<String> line = singletonList("çççPedro");
-        List<Sale> sales = SaleParser.take(line);
+        List<Sale> sales = SaleParser.parse(line);
         assertEquals(0, sales.size());
     }
 }

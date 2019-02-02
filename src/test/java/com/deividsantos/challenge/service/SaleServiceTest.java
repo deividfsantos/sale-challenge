@@ -5,6 +5,7 @@ import com.deividsantos.challenge.model.Sale;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -14,6 +15,7 @@ public class SaleServiceTest {
     @Test
     public void getMostExpensiveSaleTest() throws Exception {
         assertEquals("04",SaleService.getMostExpensiveSale(buildSale()));
+        assertEquals(null,SaleService.getMostExpensiveSale(new ArrayList<>()));
     }
 
     private List<Sale> buildSale() {

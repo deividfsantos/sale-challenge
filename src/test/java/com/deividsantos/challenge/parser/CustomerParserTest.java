@@ -13,7 +13,7 @@ public class CustomerParserTest {
 
     @Test
     public void takeCustomersWithMiscLinesTest() {
-        List<Customer> customers = CustomerParser.take(buildLines());
+        List<Customer> customers = CustomerParser.parse(buildLines());
         assertEquals(2, customers.size());
         assertEquals("2345675434544345", customers.get(0).getCnpj());
         assertEquals("Rural", customers.get(0).getBusinessArea());
@@ -26,27 +26,21 @@ public class CustomerParserTest {
     @Test
     public void takeCustomersWithNoNameTest() {
         List<String> line = singletonList("002ç2345675434544345ççRural");
-        List<Customer> customers = CustomerParser.take(line);
-        assertEquals(1, customers.size());
-        assertEquals("2345675434544345", customers.get(0).getCnpj());
-        assertEquals("Rural", customers.get(0).getBusinessArea());
-        assertEquals("", customers.get(0).getName());
+        List<Customer> customers = CustomerParser.parse(line);
+        assertEquals(0, customers.size());
     }
 
     @Test
     public void takeCustomersWithNoCnpjTest() {
         List<String> line = singletonList("002çççRural");
-        List<Customer> customers = CustomerParser.take(line);
-        assertEquals(1, customers.size());
-        assertEquals("", customers.get(0).getCnpj());
-        assertEquals("Rural", customers.get(0).getBusinessArea());
-        assertEquals("", customers.get(0).getName());
+        List<Customer> customers = CustomerParser.parse(line);
+        assertEquals(0, customers.size());
     }
 
     @Test
     public void takeCustomersWithNoIdTest() {
         List<String> line = singletonList("çççRural");
-        List<Customer> customers = CustomerParser.take(line);
+        List<Customer> customers = CustomerParser.parse(line);
         assertEquals(0, customers.size());
     }
 

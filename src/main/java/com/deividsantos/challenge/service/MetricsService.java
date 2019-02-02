@@ -13,9 +13,9 @@ import java.util.List;
 class MetricsService {
 
     Metrics getAll(List<String> lines) {
-        return build(CustomerParser.take(lines),
-                SalesmanParser.take(lines),
-                SaleParser.take(lines));
+        return build(CustomerParser.parse(lines),
+                SalesmanParser.parse(lines),
+                SaleParser.parse(lines));
     }
 
     Metrics build(List<Customer> customers, List<Salesman> salesmen, List<Sale> sales) {

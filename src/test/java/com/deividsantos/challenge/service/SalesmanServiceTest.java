@@ -6,6 +6,7 @@ import com.deividsantos.challenge.model.Salesman;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -20,6 +21,10 @@ public class SalesmanServiceTest {
     @Test
     public void getWorstSalesman() throws Exception {
         assertEquals("030405020304", SalesmanService.getWorstSalesman(buildSalesmen(), buildSale()));
+        assertEquals(null, SalesmanService.getWorstSalesman(new ArrayList<>(), new ArrayList<>()));
+        assertEquals("030405020304", SalesmanService.getWorstSalesman(buildSalesmen(), new ArrayList<>()));
+        assertEquals(null, SalesmanService.getWorstSalesman(new ArrayList<>(), buildSale()));
+
     }
 
     private List<Salesman> buildSalesmen() {
