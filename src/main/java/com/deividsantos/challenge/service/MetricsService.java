@@ -12,7 +12,9 @@ import java.util.List;
 
 class MetricsService {
     String getMetrics(List<String> lines) {
-        return build(CustomerParser.parse(lines), SalesmanParser.parse(lines), SaleParser.parse(lines))
+        return build(CustomerParser.parse(lines),
+                SalesmanParser.parse(lines),
+                SaleParser.parse(lines))
                 .getSummarized();
     }
 
