@@ -25,4 +25,3 @@ class SaleService {
         return ItemService.sumValues(sale.getItems());
     }
 }
-t
