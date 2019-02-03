@@ -44,6 +44,23 @@ public class SalesmanParserTest {
         assertEquals(0, salesmen.size());
     }
 
+    @Test
+    public void takeSalesmenWithNameDiffTest() {
+        List<Salesman> salesmen = SalesmanParser.parse(buildLinesWithDiffName());
+        assertEquals(2, salesmen.size());
+        assertEquals("1234567891234", salesmen.get(0).getCpf());
+        assertEquals("Pedro Açod çadoa dadaçsaos", salesmen.get(0).getName());
+        assertEquals(BigDecimal.valueOf(50000), salesmen.get(0).getSalary());
+        assertEquals("3245678865434", salesmen.get(1).getCpf());
+        assertEquals("Paulo", salesmen.get(1).getName());
+        assertEquals(BigDecimal.valueOf(40000.99), salesmen.get(1).getSalary());
+    }
+
+    private List<String> buildLinesWithDiffName() {
+        return asList(("001ç1234567891234çPedro Açod çadoa dadaçsaosç50000\n" +
+                "001ç3245678865434çPauloç40000.99").split("\n"));
+    }
+
     private List<String> buildLines() {
         return asList(("001ç1234567891234çPedroç50000\n" +
                 "001ç3245678865434çPauloç40000.99\n" +

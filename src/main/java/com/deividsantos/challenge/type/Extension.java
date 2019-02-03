@@ -13,5 +13,4 @@ public enum Extension {
     public String get() {
         return extension;
     }
-
 }

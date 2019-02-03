@@ -57,7 +57,7 @@ public class SaleParserTest {
                 "001çsagsasd324sgg5678865434svdçvPauloç40000.99\n" +
                 "002ç23gas456dssd7543454sf434safs5çgsagasgJose da SilvaçRural\n" +
                 "002ç2345sg6754ds33444345çEdafsguardo PereiraçRural\n" +
-                "003çsds10ç[sgag1-ds10-100,2-30-2.dgagsag50,3-40-3.10]çPedro\n" +
-                "003ç08ç[1-34dsass-10,2-33-1.50,sagg3-40-0.10]çPaulo").split("\n"));
+                "003çsds10ç[sgag1-ds10-100,2-30-2.dgagsag50,3-40xzz-3.10]çPedro\n" +
+                "003ç08sadç[1-34dsass-10,sddssd2da33-gdg-0.10]çPasddaulo").split("\n"));
     }
 }

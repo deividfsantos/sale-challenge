@@ -197,7 +197,7 @@ public class MetricsServiceTest {
                 "0s02ç234567sad5434544345çJasasgose da SilvaçRural\n" +
                 "002ç23456754sffas33444345çEdusaardo PereiraçRural\n" +
                 "002ç2145sfsaf675433444345çEduarsgdggssso SilvaçIndustria\n" +
-                "003ç10ç[1-10-100,2-30-2.50,safsafasg3-40-3.10]çPedro\n" +
-                "003ç08ç[sfaf1-34-10,2-33-1.50,3gggsa-40-0.10]çPaulo").split("\n"));
+                "003ç1s0ç[1-10-sd100,2-3sd0-2.50,safsafasg3-40-3sd.10]çPedro\n" +
+                "003ç0ss8ç[sfaf1-3s4-10,2-33sd-1.50,3gggsa-40-0.10]çPaulo").split("\n"));
     }
 }

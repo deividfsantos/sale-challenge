@@ -1,6 +1,7 @@
 package com.deividsantos.challenge.service;
 
 import com.deividsantos.challenge.model.Sale;
+import com.deividsantos.challenge.model.Salesman;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,6 +15,13 @@ class SaleService {
                 .max(comparing(SaleService::sumSaleItemsValue))
                 .map(Sale::getSaleId)
                 .orElse("There are no sales.");
+    }
+
+    static BigDecimal sumSalesFromSalesman(Salesman salesman, List<Sale> sales) {
+        return sales.stream()
+                .filter(sale -> sale.getSalesmanName().equalsIgnoreCase(salesman.getName()))
+                .map(SaleService::sumSaleItemsValue)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     private static BigDecimal sumSaleItemsValue(Sale sale) {
