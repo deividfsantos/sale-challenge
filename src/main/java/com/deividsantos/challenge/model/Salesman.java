@@ -7,7 +7,7 @@ public class Salesman {
     private String name;
     private BigDecimal salary;
 
-    private Salesman(SalesmanBuilder salesmanBuilder) {
+    private Salesman(Builder salesmanBuilder) {
         this.cpf = salesmanBuilder.cpf;
         this.name = salesmanBuilder.name;
         this.salary = salesmanBuilder.salary;
@@ -37,23 +37,23 @@ public class Salesman {
         this.salary = salary;
     }
 
-    public static class SalesmanBuilder {
+    public static class Builder {
 
         private String cpf;
         private String name;
         private BigDecimal salary;
 
-        public SalesmanBuilder withCpf(String cpf) {
+        public Builder withCpf(String cpf) {
             this.cpf = cpf;
             return this;
         }
 
-        public SalesmanBuilder withName(String name) {
+        public Builder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public SalesmanBuilder withSalary(BigDecimal salary) {
+        public Builder withSalary(BigDecimal salary) {
             this.salary = salary;
             return this;
         }

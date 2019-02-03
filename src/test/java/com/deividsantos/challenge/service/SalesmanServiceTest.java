@@ -28,17 +28,17 @@ public class SalesmanServiceTest {
     }
 
     private List<Salesman> buildSalesmen() {
-        return asList(new Salesman.SalesmanBuilder()
+        return asList(new Salesman.Builder()
                         .withCpf("030405020304")
                         .withName("Teste")
                         .withSalary(BigDecimal.valueOf(10))
                         .build(),
-                new Salesman.SalesmanBuilder()
+                new Salesman.Builder()
                         .withCpf("130405020304")
                         .withName("Teste1")
                         .withSalary(BigDecimal.valueOf(10))
                         .build(),
-                new Salesman.SalesmanBuilder()
+                new Salesman.Builder()
                         .withCpf("230405020304")
                         .withName("Teste2")
                         .withSalary(BigDecimal.valueOf(10))
@@ -46,12 +46,12 @@ public class SalesmanServiceTest {
     }
 
     private List<Sale> buildSale() {
-        return asList(new Sale.SaleBuilder()
+        return asList(new Sale.Builder()
                         .withId("01")
                         .withSalesmanName("Teste1")
                         .withItems(builditems("10"))
                         .build(),
-                new Sale.SaleBuilder()
+                new Sale.Builder()
                         .withId("02")
                         .withSalesmanName("Teste2")
                         .withItems(builditems("20"))
@@ -59,12 +59,12 @@ public class SalesmanServiceTest {
     }
 
     private List<Item> builditems(String name) {
-        return asList(new Item.ItemBuilder()
+        return asList(new Item.Builder()
                         .withId(name)
                         .withPrice(new BigDecimal(name))
                         .withQuantity(Long.valueOf(name))
                         .build(),
-                new Item.ItemBuilder()
+                new Item.Builder()
                         .withId(name)
                         .withPrice(new BigDecimal(name).add(BigDecimal.valueOf(5)))
                         .withQuantity(Long.valueOf(name))

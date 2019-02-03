@@ -26,7 +26,7 @@ public class SalesmanParser {
     }
 
     private static Function<Matcher, Salesman> build() {
-        return atributes -> new Salesman.SalesmanBuilder()
+        return atributes -> new Salesman.Builder()
                 .withCpf(atributes.group(CPF_INDEX))
                 .withName(atributes.group(NAME_INDEX))
                 .withSalary(new BigDecimal(atributes.group(SALARY_INDEX)))

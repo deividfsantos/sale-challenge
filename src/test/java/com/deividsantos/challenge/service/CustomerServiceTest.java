@@ -17,17 +17,17 @@ public class CustomerServiceTest {
     }
 
     private List<Customer> buildCustomers() {
-        return asList(new Customer.CustomerBuilder()
+        return asList(new Customer.Builder()
                         .withBusinessArea("01")
                         .withCnpj("18778509498123")
                         .withName("Teste1")
                         .build(),
-                new Customer.CustomerBuilder()
+                new Customer.Builder()
                         .withBusinessArea("01")
                         .withCnpj("28778509498123")
                         .withName("Teste2")
                         .build(),
-                new Customer.CustomerBuilder()
+                new Customer.Builder()
                         .withBusinessArea("01")
                         .withCnpj("38778509498123")
                         .withName("Teste3")

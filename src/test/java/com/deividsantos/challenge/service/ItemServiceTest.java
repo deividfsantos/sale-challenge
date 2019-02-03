@@ -18,17 +18,17 @@ public class ItemServiceTest {
     }
 
     private List<Item> buildItems() {
-        return asList(new Item.ItemBuilder()
+        return asList(new Item.Builder()
                         .withId("01")
                         .withPrice(BigDecimal.ONE)
                         .withQuantity(2L)
                         .build(),
-                new Item.ItemBuilder()
+                new Item.Builder()
                         .withId("02")
                         .withPrice(BigDecimal.ZERO)
                         .withQuantity(3L)
                         .build(),
-                new Item.ItemBuilder()
+                new Item.Builder()
                         .withId("03")
                         .withPrice(BigDecimal.TEN)
                         .withQuantity(4L)

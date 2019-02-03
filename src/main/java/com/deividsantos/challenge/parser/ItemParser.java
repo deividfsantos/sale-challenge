@@ -37,7 +37,7 @@ class ItemParser {
     }
 
     private static Function<String[], Item> buildItem() {
-        return itemAtributes -> new Item.ItemBuilder()
+        return itemAtributes -> new Item.Builder()
                 .withId(itemAtributes[ID_INDEX])
                 .withQuantity(Long.valueOf(itemAtributes[QUANTITY_INDEX]))
                 .withPrice(new BigDecimal(itemAtributes[PRICE_INDEX]))

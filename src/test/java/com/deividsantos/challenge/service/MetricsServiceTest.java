@@ -81,27 +81,27 @@ public class MetricsServiceTest {
     }
 
     private List<Salesman> buildSalesmen() {
-        return asList(new Salesman.SalesmanBuilder()
+        return asList(new Salesman.Builder()
                         .withCpf("030405020304")
                         .withName("Teste")
                         .withSalary(BigDecimal.valueOf(10))
                         .build(),
-                new Salesman.SalesmanBuilder()
+                new Salesman.Builder()
                         .withCpf("130405020304")
                         .withName("Teste1")
                         .withSalary(BigDecimal.valueOf(10))
                         .build(),
-                new Salesman.SalesmanBuilder()
+                new Salesman.Builder()
                         .withCpf("230405020304")
                         .withName("Teste2")
                         .withSalary(BigDecimal.valueOf(10))
                         .build(),
-                new Salesman.SalesmanBuilder()
+                new Salesman.Builder()
                         .withCpf("330405020304")
                         .withName("Teste3")
                         .withSalary(BigDecimal.valueOf(10))
                         .build(),
-                new Salesman.SalesmanBuilder()
+                new Salesman.Builder()
                         .withCpf("430405020304")
                         .withName("Teste4")
                         .withSalary(BigDecimal.valueOf(10))
@@ -109,17 +109,17 @@ public class MetricsServiceTest {
     }
 
     private List<Customer> buildCustomers() {
-        return asList(new Customer.CustomerBuilder()
+        return asList(new Customer.Builder()
                         .withBusinessArea("01")
                         .withCnpj("18778509498123")
                         .withName("Teste1")
                         .build(),
-                new Customer.CustomerBuilder()
+                new Customer.Builder()
                         .withBusinessArea("01")
                         .withCnpj("28778509498123")
                         .withName("Teste2")
                         .build(),
-                new Customer.CustomerBuilder()
+                new Customer.Builder()
                         .withBusinessArea("01")
                         .withCnpj("38778509498123")
                         .withName("Teste3")
@@ -127,22 +127,22 @@ public class MetricsServiceTest {
     }
 
     private List<Sale> buildSale() {
-        return asList(new Sale.SaleBuilder()
+        return asList(new Sale.Builder()
                         .withId("01")
                         .withSalesmanName("Teste1")
                         .withItems(builditems("10"))
                         .build(),
-                new Sale.SaleBuilder()
+                new Sale.Builder()
                         .withId("02")
                         .withSalesmanName("Teste2")
                         .withItems(builditems("20"))
                         .build(),
-                new Sale.SaleBuilder()
+                new Sale.Builder()
                         .withId("03")
                         .withSalesmanName("Teste3")
                         .withItems(builditems("30"))
                         .build(),
-                new Sale.SaleBuilder()
+                new Sale.Builder()
                         .withId("04")
                         .withSalesmanName("Teste4")
                         .withItems(builditems("40"))
@@ -150,17 +150,17 @@ public class MetricsServiceTest {
     }
 
     private List<Item> builditems(String name) {
-        return asList(new Item.ItemBuilder()
+        return asList(new Item.Builder()
                         .withId(name)
                         .withPrice(new BigDecimal(name))
                         .withQuantity(Long.valueOf(name))
                         .build(),
-                new Item.ItemBuilder()
+                new Item.Builder()
                         .withId(name)
                         .withPrice(new BigDecimal(name).add(BigDecimal.valueOf(5)))
                         .withQuantity(Long.valueOf(name))
                         .build(),
-                new Item.ItemBuilder()
+                new Item.Builder()
                         .withId(name)
                         .withPrice(new BigDecimal(name).add(BigDecimal.valueOf(8)))
                         .withQuantity(Long.valueOf(name))

@@ -7,7 +7,7 @@ public class Sale {
     private List<Item> items;
     private String salesmanName;
 
-    private Sale(SaleBuilder saleBuilder) {
+    private Sale(Builder saleBuilder) {
         this.saleId = saleBuilder.saleId;
         this.items = saleBuilder.items;
         this.salesmanName = saleBuilder.salesmanName;
@@ -37,23 +37,23 @@ public class Sale {
         this.salesmanName = salesmanName;
     }
 
-    public static class SaleBuilder {
+    public static class Builder {
 
         private String saleId;
         private List<Item> items;
         private String salesmanName;
 
-        public SaleBuilder withId(String saleId) {
+        public Builder withId(String saleId) {
             this.saleId = saleId;
             return this;
         }
 
-        public SaleBuilder withItems(List<Item> items) {
+        public Builder withItems(List<Item> items) {
             this.items = items;
             return this;
         }
 
-        public SaleBuilder withSalesmanName(String salesmanName) {
+        public Builder withSalesmanName(String salesmanName) {
             this.salesmanName = salesmanName;
             return this;
         }

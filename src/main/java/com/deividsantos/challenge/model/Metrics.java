@@ -7,7 +7,7 @@ public class Metrics {
     private String mostExpensiveSale;
     private String worstSalesman;
 
-    public Metrics(MetricsBuilder metricsBuilder) {
+    public Metrics(Builder metricsBuilder) {
         this.amountOfClients = metricsBuilder.amountOfClients;
         this.amountOfSalesmen = metricsBuilder.amountOfSalesman;
         this.mostExpensiveSale = metricsBuilder.mostExpensiveSale;
@@ -47,30 +47,30 @@ public class Metrics {
         this.worstSalesman = worstSalesman;
     }
 
-    public static class MetricsBuilder {
+    public static class Builder {
 
         private Integer amountOfClients;
         private Integer amountOfSalesman;
         private String mostExpensiveSale;
         private String worstSalesman;
 
-        public MetricsBuilder withAmountOfClientes(Integer amountOfClients) {
+        public Builder withAmountOfClientes(Integer amountOfClients) {
             this.amountOfClients = amountOfClients;
             return this;
         }
 
 
-        public MetricsBuilder withAmountOfSalesmen(Integer amountOfSalesmen) {
+        public Builder withAmountOfSalesmen(Integer amountOfSalesmen) {
             this.amountOfSalesman = amountOfSalesmen;
             return this;
         }
 
-        public MetricsBuilder withMostExpensiveSale(String mostExpensiveSale) {
+        public Builder withMostExpensiveSale(String mostExpensiveSale) {
             this.mostExpensiveSale = mostExpensiveSale;
             return this;
         }
 
-        public MetricsBuilder withWorstSalesman(String worstSalesman) {
+        public Builder withWorstSalesman(String worstSalesman) {
             this.worstSalesman = worstSalesman;
             return this;
         }
@@ -82,7 +82,7 @@ public class Metrics {
 
     @Override
     public String toString() {
-        return "\nMetrics:" +
+        return "Metrics:" +
                 "\nAmount of clients: " + amountOfClients +
                 "\nAmount of salesmen: " + amountOfSalesmen +
                 "\nMost expensive sale: " + mostExpensiveSale +

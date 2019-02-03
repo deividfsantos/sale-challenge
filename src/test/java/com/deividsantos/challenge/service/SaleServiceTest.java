@@ -19,12 +19,12 @@ public class SaleServiceTest {
     }
 
     private List<Sale> buildSale() {
-        return asList(new Sale.SaleBuilder()
+        return asList(new Sale.Builder()
                         .withId("03")
                         .withSalesmanName("Teste3")
                         .withItems(builditems("30"))
                         .build(),
-                new Sale.SaleBuilder()
+                new Sale.Builder()
                         .withId("04")
                         .withSalesmanName("Teste4")
                         .withItems(builditems("40"))
@@ -32,12 +32,12 @@ public class SaleServiceTest {
     }
 
     private List<Item> builditems(String name) {
-        return asList(new Item.ItemBuilder()
+        return asList(new Item.Builder()
                         .withId(name)
                         .withPrice(new BigDecimal(name).add(BigDecimal.valueOf(5)))
                         .withQuantity(Long.valueOf(name))
                         .build(),
-                new Item.ItemBuilder()
+                new Item.Builder()
                         .withId(name)
                         .withPrice(new BigDecimal(name).add(BigDecimal.valueOf(8)))
                         .withQuantity(Long.valueOf(name))

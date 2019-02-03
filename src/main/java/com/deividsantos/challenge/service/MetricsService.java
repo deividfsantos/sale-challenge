@@ -19,7 +19,7 @@ class MetricsService {
     }
 
     Metrics build(List<Customer> customers, List<Salesman> salesmen, List<Sale> sales) {
-        return new Metrics.MetricsBuilder()
+        return new Metrics.Builder()
                 .withAmountOfClientes(CustomerService.getAmountOfClients(customers))
                 .withAmountOfSalesmen(SalesmanService.getAmountOfSalesman(salesmen))
                 .withMostExpensiveSale(SaleService.getMostExpensiveSaleString(sales))

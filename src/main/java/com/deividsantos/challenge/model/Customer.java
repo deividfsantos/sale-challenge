@@ -6,7 +6,7 @@ public class Customer {
     private String name;
     private String businessArea;
 
-    private Customer(CustomerBuilder customerBuilder) {
+    private Customer(Builder customerBuilder) {
         this.cnpj = customerBuilder.cnpj;
         this.name = customerBuilder.name;
         this.businessArea = customerBuilder.businessArea;
@@ -36,23 +36,23 @@ public class Customer {
         this.businessArea = businessArea;
     }
 
-    public static class CustomerBuilder {
+    public static class Builder {
 
         private String cnpj;
         private String name;
         private String businessArea;
 
-        public CustomerBuilder withCnpj(String cnpj) {
+        public Builder withCnpj(String cnpj) {
             this.cnpj = cnpj;
             return this;
         }
 
-        public CustomerBuilder withName(String name) {
+        public Builder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public CustomerBuilder withBusinessArea(String businessArea) {
+        public Builder withBusinessArea(String businessArea) {
             this.businessArea = businessArea;
             return this;
         }

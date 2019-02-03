@@ -26,7 +26,7 @@ public class CustomerParser {
     }
 
     private static Function<Matcher, Customer> build() {
-        return atributes -> new Customer.CustomerBuilder()
+        return atributes -> new Customer.Builder()
                 .withCnpj(atributes.group(CNPJ_INDEX))
                 .withName(atributes.group(NAME_INDEX))
                 .withBusinessArea(atributes.group(AREA_INDEX))

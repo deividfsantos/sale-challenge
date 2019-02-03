@@ -7,7 +7,7 @@ public class Item {
     private Long quantity;
     private BigDecimal price;
 
-    private Item(ItemBuilder itemBuilder) {
+    private Item(Builder itemBuilder) {
         this.id = itemBuilder.id;
         this.quantity = itemBuilder.quantity;
         this.price = itemBuilder.price;
@@ -37,22 +37,22 @@ public class Item {
         this.price = price;
     }
 
-    public static class ItemBuilder {
+    public static class Builder {
         private String id;
         private Long quantity;
         private BigDecimal price;
 
-        public ItemBuilder withId(String id) {
+        public Builder withId(String id) {
             this.id = id;
             return this;
         }
 
-        public ItemBuilder withQuantity(Long quantity) {
+        public Builder withQuantity(Long quantity) {
             this.quantity = quantity;
             return this;
         }
 
-        public ItemBuilder withPrice(BigDecimal price) {
+        public Builder withPrice(BigDecimal price) {
             this.price = price;
             return this;
         }
