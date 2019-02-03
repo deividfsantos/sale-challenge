@@ -29,8 +29,8 @@ public class EventService {
     private static void process(WatchEvent event) {
         String fileName = getFileNameWithoutExtension(event);
         List<String> lines = reader.read(fileName);
-        Metrics metrics = metricsService.getAll(lines);
-        writer.writeOutputFile(metrics.toString(), fileName);
+        String metrics = metricsService.getMetrics(lines);
+        writer.writeOutputFile(metrics, fileName);
     }
 
     private static String getFileNameWithoutExtension(WatchEvent event) {

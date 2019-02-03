@@ -14,13 +14,7 @@ class SalesmanService {
         return salesmen.size();
     }
 
-    static String getWorstSalesmanString(List<Salesman> salesmen, List<Sale> sales) {
-        return getWorstSalesman(salesmen, sales)
-                .map(Salesman::toString)
-                .orElse("There are no salesmen.");
-    }
-
-    private static Optional<Salesman> getWorstSalesman(List<Salesman> salesmen, List<Sale> sales) {
+    static Optional<Salesman> getWorstSalesman(List<Salesman> salesmen, List<Sale> sales) {
         return salesmen.stream()
                 .min(comparing(salesman -> SaleService.sumSalesFromSalesman(salesman, sales)));
     }

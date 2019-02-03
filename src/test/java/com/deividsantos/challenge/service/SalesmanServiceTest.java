@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
@@ -20,10 +21,10 @@ public class SalesmanServiceTest {
 
     @Test
     public void getWorstSalesman() throws Exception {
-        assertEquals("CPF: 030405020304, Name: Teste, Salary: 10", SalesmanService.getWorstSalesmanString(buildSalesmen(), buildSale()));
-        assertEquals("There are no salesmen.", SalesmanService.getWorstSalesmanString(new ArrayList<>(), new ArrayList<>()));
-        assertEquals("CPF: 030405020304, Name: Teste, Salary: 10", SalesmanService.getWorstSalesmanString(buildSalesmen(), new ArrayList<>()));
-        assertEquals("There are no salesmen.", SalesmanService.getWorstSalesmanString(new ArrayList<>(), buildSale()));
+        assertEquals("CPF: 030405020304, Name: Teste, Salary: 10", SalesmanService.getWorstSalesman(buildSalesmen(), buildSale()).get().toString());
+        assertEquals(Optional.empty(), SalesmanService.getWorstSalesman(new ArrayList<>(), new ArrayList<>()));
+        assertEquals("CPF: 030405020304, Name: Teste, Salary: 10", SalesmanService.getWorstSalesman(buildSalesmen(), new ArrayList<>()).get().toString());
+        assertEquals(Optional.empty(), SalesmanService.getWorstSalesman(new ArrayList<>(), buildSale()));
 
     }
 

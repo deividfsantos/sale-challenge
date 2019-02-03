@@ -10,11 +10,8 @@ import java.util.Optional;
 import static java.util.Comparator.comparing;
 
 class SaleService {
-
-    static String getMostExpensiveSaleString(List<Sale> sales) {
-        return getMostExpensiveSale(sales)
-                .map(Sale::toString)
-                .orElse("There are no sales.");
+    static Optional<Sale> getMostExpensiveSale(List<Sale> sales) {
+        return sales.stream().max(comparing(SaleService::sumSaleItemsValue));
     }
 
     static BigDecimal sumSalesFromSalesman(Salesman salesman, List<Sale> sales) {
@@ -24,11 +21,8 @@ class SaleService {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    private static Optional<Sale> getMostExpensiveSale(List<Sale> sales) {
-        return sales.stream().max(comparing(SaleService::sumSaleItemsValue));
-    }
-
     private static BigDecimal sumSaleItemsValue(Sale sale) {
         return ItemService.sumValues(sale.getItems());
     }
 }
+t

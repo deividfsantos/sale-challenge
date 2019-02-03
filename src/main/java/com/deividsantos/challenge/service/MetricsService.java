@@ -11,19 +11,17 @@ import com.deividsantos.challenge.parser.SalesmanParser;
 import java.util.List;
 
 class MetricsService {
-
-    Metrics getAll(List<String> lines) {
-        return build(CustomerParser.parse(lines),
-                SalesmanParser.parse(lines),
-                SaleParser.parse(lines));
+    String getMetrics(List<String> lines) {
+        return build(CustomerParser.parse(lines), SalesmanParser.parse(lines), SaleParser.parse(lines))
+                .getSummarized();
     }
 
-    Metrics build(List<Customer> customers, List<Salesman> salesmen, List<Sale> sales) {
+    private Metrics build(List<Customer> customers, List<Salesman> salesmen, List<Sale> sales) {
         return new Metrics.Builder()
                 .withAmountOfClientes(CustomerService.getAmountOfClients(customers))
                 .withAmountOfSalesmen(SalesmanService.getAmountOfSalesman(salesmen))
-                .withMostExpensiveSale(SaleService.getMostExpensiveSaleString(sales))
-                .withWorstSalesman(SalesmanService.getWorstSalesmanString(salesmen, sales))
+                .withMostExpensiveSale(SaleService.getMostExpensiveSale(sales).orElse(null))
+                .withWorstSalesman(SalesmanService.getWorstSalesman(salesmen, sales).orElse(null))
                 .build();
     }
 }
