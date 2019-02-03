@@ -82,7 +82,7 @@ public class Metrics {
 
     @Override
     public String toString() {
-        return "Metrics:" +
+        return "Metrics" +
                 "\nAmount of clients: " + amountOfClients +
                 "\nAmount of salesmen: " + amountOfSalesmen +
                 "\nMost expensive sale: " + mostExpensiveSale +

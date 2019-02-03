@@ -9,9 +9,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CustomerParser {
-
-
-    private static final String CUSTOMER_REGEX = "002ç([0-9]+)ç([ a-zA-Z áç]+)ç([ a-zA-Z áç]+)";
+    private static final String CUSTOMER_REGEX = "002ç([0-9]{14,16})ç([ a-zA-Z áç]+)ç([ a-zA-Z áç]+)";
     private static final Integer CNPJ_INDEX = 1;
     private static final Integer NAME_INDEX = 2;
     private static final Integer AREA_INDEX = 3;

@@ -29,7 +29,7 @@ public class MetricsServiceTest {
     @Test
     public void buildAllMetricsToStringTest() {
         Metrics allMetrics = metricsService.build(buildCustomers(), buildSalesmen(), buildSale());
-        assertEquals("\nMetrics:" +
+        assertEquals("Metrics" +
                         "\nAmount of clients: 3" +
                         "\nAmount of salesmen: 5" +
                         "\nMost expensive sale: Sale ID: 04, Items: [Item ID: 40, Quantity: 40, Price: 40, Item ID: 40, Quantity: 40, Price: 45, Item ID: 40, Quantity: 40, Price: 48], Salesman Name: Teste4" +
@@ -49,7 +49,7 @@ public class MetricsServiceTest {
     @Test
     public void getAllMetricsWithLinesToStringTest() {
         Metrics allMetrics = metricsService.getAll(buildLines());
-        assertEquals("\nMetrics:" +
+        assertEquals("Metrics" +
                         "\nAmount of clients: 3" +
                         "\nAmount of salesmen: 2" +
                         "\nMost expensive sale: Sale ID: 10, Items: [Item ID: 1, Quantity: 10, Price: 100, Item ID: 2, Quantity: 30, Price: 2.50, Item ID: 3, Quantity: 40, Price: 3.10], Salesman Name: Pedro" +
@@ -60,7 +60,7 @@ public class MetricsServiceTest {
     @Test
     public void getAllMetricsWithWrongLinesToStringTest() {
         Metrics allMetrics = metricsService.getAll(buildWrongLines());
-        assertEquals("\nMetrics:" +
+        assertEquals("Metrics" +
                         "\nAmount of clients: 0" +
                         "\nAmount of salesmen: 0" +
                         "\nMost expensive sale: There are no sales." +
@@ -72,7 +72,7 @@ public class MetricsServiceTest {
     @Test
     public void getAllMetricsWithWrongItemLinesToStringTest() {
         Metrics allMetrics = metricsService.getAll(buildWrongItemLines());
-        assertEquals("\nMetrics:" +
+        assertEquals("Metrics" +
                         "\nAmount of clients: 0" +
                         "\nAmount of salesmen: 0" +
                         "\nMost expensive sale: There are no sales." +

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class SalesmanParser {
 
-    private static final String SALESMAN_REGEX = "001ç([0-9]+)ç([ a-zA-Z áç]+)ç([-+]?[0-9]*\\.?[0-9]*)";
+    private static final String SALESMAN_REGEX = "001ç([0-9]{9,14})ç([ a-zA-Z áç]+)ç([0-9]*\\.?[0-9]*)";
     private static final Integer CPF_INDEX = 1;
     private static final Integer NAME_INDEX = 2;
     private static final Integer SALARY_INDEX = 3;
