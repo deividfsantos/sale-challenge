@@ -3,7 +3,6 @@ package com.deividsantos.challenge.model;
 import java.math.BigDecimal;
 
 public class Salesman {
-
     private String cpf;
     private String name;
     private BigDecimal salary;
@@ -67,10 +66,6 @@ public class Salesman {
 
     @Override
     public String toString() {
-        return "Salesman{" +
-                "cpf='" + cpf + '\'' +
-                ", name='" + name + '\'' +
-                ", salary=" + salary +
-                '}';
+        return String.format("CPF: %s, Name: %s, Salary: %s", cpf, name, salary);
     }
 }

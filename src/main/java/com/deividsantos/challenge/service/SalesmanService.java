@@ -4,6 +4,7 @@ import com.deividsantos.challenge.model.Sale;
 import com.deividsantos.challenge.model.Salesman;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Comparator.comparing;
 
@@ -13,11 +14,15 @@ class SalesmanService {
         return salesmen.size();
     }
 
-    static String getWorstSalesman(List<Salesman> salesmen, List<Sale> sales) {
-        return salesmen.stream()
-                .min(comparing(salesman -> SaleService.sumSalesFromSalesman(salesman, sales)))
-                .map(Salesman::getCpf)
+    static String getWorstSalesmanString(List<Salesman> salesmen, List<Sale> sales) {
+        return getWorstSalesman(salesmen, sales)
+                .map(Salesman::toString)
                 .orElse("There are no salesmen.");
+    }
+
+    private static Optional<Salesman> getWorstSalesman(List<Salesman> salesmen, List<Sale> sales) {
+        return salesmen.stream()
+                .min(comparing(salesman -> SaleService.sumSalesFromSalesman(salesman, sales)));
     }
 
 }

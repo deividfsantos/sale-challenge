@@ -5,15 +5,15 @@ import com.deividsantos.challenge.model.Salesman;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Comparator.comparing;
 
 class SaleService {
 
-    static String getMostExpensiveSale(List<Sale> sales) {
-        return sales.stream()
-                .max(comparing(SaleService::sumSaleItemsValue))
-                .map(Sale::getSaleId)
+    static String getMostExpensiveSaleString(List<Sale> sales) {
+        return getMostExpensiveSale(sales)
+                .map(Sale::toString)
                 .orElse("There are no sales.");
     }
 
@@ -22,6 +22,10 @@ class SaleService {
                 .filter(sale -> sale.getSalesmanName().equalsIgnoreCase(salesman.getName()))
                 .map(SaleService::sumSaleItemsValue)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    private static Optional<Sale> getMostExpensiveSale(List<Sale> sales) {
+        return sales.stream().max(comparing(SaleService::sumSaleItemsValue));
     }
 
     private static BigDecimal sumSaleItemsValue(Sale sale) {

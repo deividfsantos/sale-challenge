@@ -11,35 +11,29 @@ import java.util.List;
 
 public class EventService {
 
-    private Writer writer;
-    private Reader reader;
-    private MetricsService metricsService;
+    private static Writer writer = new Writer();
+    private static Reader reader = new Reader();
+    private static Watcher watcher = new Watcher();
+    private static MetricsService metricsService = new MetricsService();
     private static final String EMPTY_VALUE = "";
 
-    public EventService() {
-        this.writer = new Writer();
-        this.reader = new Reader();
-        this.metricsService = new MetricsService();
-    }
-
-    public void watch() {
-        EventService eventService = new EventService();
+    public static void watch() {
         try {
-            Watcher watcher = new Watcher();
-            watcher.watch().forEach(eventService::process);
+            List<WatchEvent> events = watcher.watch();
+            events.forEach(EventService::process);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void process(WatchEvent event) {
-        String fileName = getFileName(event);
+    private static void process(WatchEvent event) {
+        String fileName = getFileNameWithoutExtension(event);
         List<String> lines = reader.read(fileName);
         Metrics metrics = metricsService.getAll(lines);
         writer.writeOutputFile(metrics.toString(), fileName);
     }
 
-    private String getFileName(WatchEvent event) {
+    private static String getFileNameWithoutExtension(WatchEvent event) {
         return event.context().toString().replace(Extension.INPUT.get(), EMPTY_VALUE);
     }
 

@@ -85,7 +85,7 @@ public class Metrics {
         return "\nMetrics:" +
                 "\nAmount of clients: " + amountOfClients +
                 "\nAmount of salesmen: " + amountOfSalesmen +
-                "\nMost expensive sale ID: " + mostExpensiveSale +
-                "\nWorst salesman CNPJ: " + worstSalesman;
+                "\nMost expensive sale: " + mostExpensiveSale +
+                "\nWorst salesman: " + worstSalesman;
     }
 }

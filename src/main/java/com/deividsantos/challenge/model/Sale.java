@@ -3,7 +3,6 @@ package com.deividsantos.challenge.model;
 import java.util.List;
 
 public class Sale {
-
     private String saleId;
     private List<Item> items;
     private String salesmanName;
@@ -67,10 +66,6 @@ public class Sale {
 
     @Override
     public String toString() {
-        return "Sale{" +
-                "saleId='" + saleId + '\'' +
-                ", item=" + items +
-                ", salesmanName='" + salesmanName + '\'' +
-                '}';
+        return String.format("Sale ID: %s, Items: %s, Salesman Name: %s", saleId, items, salesmanName);
     }
 }

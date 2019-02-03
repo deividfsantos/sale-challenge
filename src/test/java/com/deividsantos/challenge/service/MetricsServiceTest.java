@@ -22,8 +22,8 @@ public class MetricsServiceTest {
         Metrics allMetrics = metricsService.build(buildCustomers(), buildSalesmen(), buildSale());
         assertEquals(Integer.valueOf(3), allMetrics.getAmountOfClients());
         assertEquals(Integer.valueOf(5), allMetrics.getAmountOfSalesmen());
-        assertEquals("030405020304", allMetrics.getWorstSalesman());
-        assertEquals("04", allMetrics.getMostExpensiveSale());
+        assertEquals("CPF: 030405020304, Name: Teste, Salary: 10", allMetrics.getWorstSalesman());
+        assertEquals("Sale ID: 04, Items: [Item ID: 40, Quantity: 40, Price: 40, Item ID: 40, Quantity: 40, Price: 45, Item ID: 40, Quantity: 40, Price: 48], Salesman Name: Teste4", allMetrics.getMostExpensiveSale());
     }
 
     @Test
@@ -32,18 +32,18 @@ public class MetricsServiceTest {
         assertEquals("\nMetrics:" +
                         "\nAmount of clients: 3" +
                         "\nAmount of salesmen: 5" +
-                        "\nMost expensive sale ID: 04" +
-                        "\nWorst salesman CNPJ: 030405020304",
+                        "\nMost expensive sale: Sale ID: 04, Items: [Item ID: 40, Quantity: 40, Price: 40, Item ID: 40, Quantity: 40, Price: 45, Item ID: 40, Quantity: 40, Price: 48], Salesman Name: Teste4" +
+                        "\nWorst salesman: CPF: 030405020304, Name: Teste, Salary: 10",
                 allMetrics.toString());
     }
 
     @Test
-    public void getAllMetricsWithLinesTeste(){
+    public void getAllMetricsWithLinesTeste() {
         Metrics metricsWithLines = metricsService.getAll(buildLines());
         assertEquals(Integer.valueOf(3), metricsWithLines.getAmountOfClients());
         assertEquals(Integer.valueOf(2), metricsWithLines.getAmountOfSalesmen());
-        assertEquals("3245678865434", metricsWithLines.getWorstSalesman());
-        assertEquals("10", metricsWithLines.getMostExpensiveSale());
+        assertEquals("CPF: 3245678865434, Name: Paulo, Salary: 40000.99", metricsWithLines.getWorstSalesman());
+        assertEquals("Sale ID: 10, Items: [Item ID: 1, Quantity: 10, Price: 100, Item ID: 2, Quantity: 30, Price: 2.50, Item ID: 3, Quantity: 40, Price: 3.10], Salesman Name: Pedro", metricsWithLines.getMostExpensiveSale());
     }
 
     @Test
@@ -52,8 +52,8 @@ public class MetricsServiceTest {
         assertEquals("\nMetrics:" +
                         "\nAmount of clients: 3" +
                         "\nAmount of salesmen: 2" +
-                        "\nMost expensive sale ID: 10" +
-                        "\nWorst salesman CNPJ: 3245678865434",
+                        "\nMost expensive sale: Sale ID: 10, Items: [Item ID: 1, Quantity: 10, Price: 100, Item ID: 2, Quantity: 30, Price: 2.50, Item ID: 3, Quantity: 40, Price: 3.10], Salesman Name: Pedro" +
+                        "\nWorst salesman: CPF: 3245678865434, Name: Paulo, Salary: 40000.99",
                 allMetrics.toString());
     }
 
@@ -63,8 +63,8 @@ public class MetricsServiceTest {
         assertEquals("\nMetrics:" +
                         "\nAmount of clients: 0" +
                         "\nAmount of salesmen: 0" +
-                        "\nMost expensive sale ID: There are no sales." +
-                        "\nWorst salesman CNPJ: There are no salesmen.",
+                        "\nMost expensive sale: There are no sales." +
+                        "\nWorst salesman: There are no salesmen.",
                 allMetrics.toString());
     }
 
@@ -75,100 +75,96 @@ public class MetricsServiceTest {
         assertEquals("\nMetrics:" +
                         "\nAmount of clients: 0" +
                         "\nAmount of salesmen: 0" +
-                        "\nMost expensive sale ID: There are no sales." +
-                        "\nWorst salesman CNPJ: There are no salesmen.",
+                        "\nMost expensive sale: There are no sales." +
+                        "\nWorst salesman: There are no salesmen.",
                 allMetrics.toString());
     }
 
     private List<Salesman> buildSalesmen() {
-        Salesman salesman = new Salesman.SalesmanBuilder()
-                .withCpf("030405020304")
-                .withName("Teste")
-                .withSalary(BigDecimal.valueOf(10))
-                .build();
-        Salesman salesman1 = new Salesman.SalesmanBuilder()
-                .withCpf("130405020304")
-                .withName("Teste1")
-                .withSalary(BigDecimal.valueOf(10))
-                .build();
-        Salesman salesman2 = new Salesman.SalesmanBuilder()
-                .withCpf("230405020304")
-                .withName("Teste2")
-                .withSalary(BigDecimal.valueOf(10))
-                .build();
-        Salesman salesman3 = new Salesman.SalesmanBuilder()
-                .withCpf("330405020304")
-                .withName("Teste3")
-                .withSalary(BigDecimal.valueOf(10))
-                .build();
-        Salesman salesman4 = new Salesman.SalesmanBuilder()
-                .withCpf("430405020304")
-                .withName("Teste4")
-                .withSalary(BigDecimal.valueOf(10))
-                .build();
-        return asList(salesman, salesman1, salesman2, salesman3, salesman4);
+        return asList(new Salesman.SalesmanBuilder()
+                        .withCpf("030405020304")
+                        .withName("Teste")
+                        .withSalary(BigDecimal.valueOf(10))
+                        .build(),
+                new Salesman.SalesmanBuilder()
+                        .withCpf("130405020304")
+                        .withName("Teste1")
+                        .withSalary(BigDecimal.valueOf(10))
+                        .build(),
+                new Salesman.SalesmanBuilder()
+                        .withCpf("230405020304")
+                        .withName("Teste2")
+                        .withSalary(BigDecimal.valueOf(10))
+                        .build(),
+                new Salesman.SalesmanBuilder()
+                        .withCpf("330405020304")
+                        .withName("Teste3")
+                        .withSalary(BigDecimal.valueOf(10))
+                        .build(),
+                new Salesman.SalesmanBuilder()
+                        .withCpf("430405020304")
+                        .withName("Teste4")
+                        .withSalary(BigDecimal.valueOf(10))
+                        .build());
     }
 
     private List<Customer> buildCustomers() {
-        Customer customer1 = new Customer.CustomerBuilder()
-                .withBusinessArea("01")
-                .withCnpj("18778509498123")
-                .withName("Teste1")
-                .build();
-        Customer customer2 = new Customer.CustomerBuilder()
-                .withBusinessArea("01")
-                .withCnpj("28778509498123")
-                .withName("Teste2")
-                .build();
-        Customer customer3 = new Customer.CustomerBuilder()
-                .withBusinessArea("01")
-                .withCnpj("38778509498123")
-                .withName("Teste3")
-                .build();
-        return asList(customer1, customer2, customer3);
+        return asList(new Customer.CustomerBuilder()
+                        .withBusinessArea("01")
+                        .withCnpj("18778509498123")
+                        .withName("Teste1")
+                        .build(),
+                new Customer.CustomerBuilder()
+                        .withBusinessArea("01")
+                        .withCnpj("28778509498123")
+                        .withName("Teste2")
+                        .build(),
+                new Customer.CustomerBuilder()
+                        .withBusinessArea("01")
+                        .withCnpj("38778509498123")
+                        .withName("Teste3")
+                        .build());
     }
 
     private List<Sale> buildSale() {
-        Sale sale1 = new Sale.SaleBuilder()
-                .withId("01")
-                .withSalesmanName("Teste1")
-                .withItems(builditems("10"))
-                .build();
-        Sale sale2 = new Sale.SaleBuilder()
-                .withId("02")
-                .withSalesmanName("Teste2")
-                .withItems(builditems("20"))
-                .build();
-        Sale sale3 = new Sale.SaleBuilder()
-                .withId("03")
-                .withSalesmanName("Teste3")
-                .withItems(builditems("30"))
-                .build();
-        Sale sale4 = new Sale.SaleBuilder()
-                .withId("04")
-                .withSalesmanName("Teste4")
-                .withItems(builditems("40"))
-                .build();
-        return asList(sale1, sale2, sale3, sale4);
+        return asList(new Sale.SaleBuilder()
+                        .withId("01")
+                        .withSalesmanName("Teste1")
+                        .withItems(builditems("10"))
+                        .build(),
+                new Sale.SaleBuilder()
+                        .withId("02")
+                        .withSalesmanName("Teste2")
+                        .withItems(builditems("20"))
+                        .build(),
+                new Sale.SaleBuilder()
+                        .withId("03")
+                        .withSalesmanName("Teste3")
+                        .withItems(builditems("30"))
+                        .build(),
+                new Sale.SaleBuilder()
+                        .withId("04")
+                        .withSalesmanName("Teste4")
+                        .withItems(builditems("40"))
+                        .build());
     }
 
     private List<Item> builditems(String name) {
-        Item item1 = new Item.ItemBuilder()
-                .withId(name)
-                .withPrice(new BigDecimal(name))
-                .withQuantity(Long.valueOf(name))
-                .build();
-        Item item2 = new Item.ItemBuilder()
-                .withId(name)
-                .withPrice(new BigDecimal(name).add(BigDecimal.valueOf(5)))
-                .withQuantity(Long.valueOf(name))
-                .build();
-        Item item3 = new Item.ItemBuilder()
-                .withId(name)
-                .withPrice(new BigDecimal(name).add(BigDecimal.valueOf(8)))
-                .withQuantity(Long.valueOf(name))
-                .build();
-        return asList(item1, item2, item3);
+        return asList(new Item.ItemBuilder()
+                        .withId(name)
+                        .withPrice(new BigDecimal(name))
+                        .withQuantity(Long.valueOf(name))
+                        .build(),
+                new Item.ItemBuilder()
+                        .withId(name)
+                        .withPrice(new BigDecimal(name).add(BigDecimal.valueOf(5)))
+                        .withQuantity(Long.valueOf(name))
+                        .build(),
+                new Item.ItemBuilder()
+                        .withId(name)
+                        .withPrice(new BigDecimal(name).add(BigDecimal.valueOf(8)))
+                        .withQuantity(Long.valueOf(name))
+                        .build());
     }
 
     private List<String> buildLines() {

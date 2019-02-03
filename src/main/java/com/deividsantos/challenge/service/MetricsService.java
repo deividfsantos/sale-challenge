@@ -22,8 +22,8 @@ class MetricsService {
         return new Metrics.MetricsBuilder()
                 .withAmountOfClientes(CustomerService.getAmountOfClients(customers))
                 .withAmountOfSalesmen(SalesmanService.getAmountOfSalesman(salesmen))
-                .withMostExpensiveSale(SaleService.getMostExpensiveSale(sales))
-                .withWorstSalesman(SalesmanService.getWorstSalesman(salesmen, sales))
+                .withMostExpensiveSale(SaleService.getMostExpensiveSaleString(sales))
+                .withWorstSalesman(SalesmanService.getWorstSalesmanString(salesmen, sales))
                 .build();
     }
 }

@@ -17,22 +17,21 @@ public class CustomerServiceTest {
     }
 
     private List<Customer> buildCustomers() {
-        Customer customer1 = new Customer.CustomerBuilder()
-                .withBusinessArea("01")
-                .withCnpj("18778509498123")
-                .withName("Teste1")
-                .build();
-        Customer customer2 = new Customer.CustomerBuilder()
-                .withBusinessArea("01")
-                .withCnpj("28778509498123")
-                .withName("Teste2")
-                .build();
-        Customer customer3 = new Customer.CustomerBuilder()
-                .withBusinessArea("01")
-                .withCnpj("38778509498123")
-                .withName("Teste3")
-                .build();
-        return asList(customer1, customer2, customer3);
+        return asList(new Customer.CustomerBuilder()
+                        .withBusinessArea("01")
+                        .withCnpj("18778509498123")
+                        .withName("Teste1")
+                        .build(),
+                new Customer.CustomerBuilder()
+                        .withBusinessArea("01")
+                        .withCnpj("28778509498123")
+                        .withName("Teste2")
+                        .build(),
+                new Customer.CustomerBuilder()
+                        .withBusinessArea("01")
+                        .withCnpj("38778509498123")
+                        .withName("Teste3")
+                        .build());
     }
 
 }

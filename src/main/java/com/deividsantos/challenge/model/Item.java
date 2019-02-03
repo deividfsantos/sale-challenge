@@ -65,10 +65,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" +
-                "id='" + id + '\'' +
-                ", quantity=" + quantity +
-                ", price=" + price +
-                '}';
+        return String.format("Item ID: %s, Quantity: %s, Price: %s", id, quantity, price);
     }
 }

@@ -65,10 +65,6 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "cnpj='" + cnpj + '\'' +
-                ", name='" + name + '\'' +
-                ", businessArea='" + businessArea + '\'' +
-                '}';
+        return String.format("Customer CNPJ: %s, Name: %s, Business Area: %s", cnpj, name, businessArea);
     }
 }

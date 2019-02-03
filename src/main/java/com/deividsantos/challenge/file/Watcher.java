@@ -2,7 +2,6 @@ package com.deividsantos.challenge.file;
 
 import com.deividsantos.challenge.type.Extension;
 
-import java.io.IOException;
 import java.nio.file.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,14 +11,22 @@ import static java.nio.file.StandardWatchEventKinds.*;
 public class Watcher extends FileBase {
 
     private WatchKey watchKey;
-    private WatchService watcher;
+    private WatchService watchService;
     private Path path;
 
-    public Watcher() throws IOException, InterruptedException {
-        path = FileSystems.getDefault().getPath(FILE_PATH_INPUT);
-        watcher = path.getFileSystem().newWatchService();
-        path.register(watcher, ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE);
-        watchKey = watcher.take();
+    public Watcher() {
+        defineDirectory();
+    }
+
+    private void defineDirectory() {
+        try {
+            path = FileSystems.getDefault().getPath(FILE_PATH_INPUT);
+            watchService = path.getFileSystem().newWatchService();
+            path.register(watchService, ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE);
+            watchKey = watchService.take();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public List<WatchEvent> watch() {

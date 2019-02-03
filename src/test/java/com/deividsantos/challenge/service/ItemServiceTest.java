@@ -15,26 +15,24 @@ public class ItemServiceTest {
     public void sumSaleItemsValueTest() throws Exception {
         assertEquals(BigDecimal.valueOf(42), ItemService.sumValues(buildItems()));
         assertEquals(BigDecimal.valueOf(0), ItemService.sumValues(new ArrayList<>()));
-
     }
 
     private List<Item> buildItems() {
-        Item item1 = new Item.ItemBuilder()
-                .withId("01")
-                .withPrice(BigDecimal.ONE)
-                .withQuantity(2L)
-                .build();
-        Item item2 = new Item.ItemBuilder()
-                .withId("02")
-                .withPrice(BigDecimal.ZERO)
-                .withQuantity(3L)
-                .build();
-        Item item3 = new Item.ItemBuilder()
-                .withId("03")
-                .withPrice(BigDecimal.TEN)
-                .withQuantity(4L)
-                .build();
-        return asList(item1, item2, item3);
+        return asList(new Item.ItemBuilder()
+                        .withId("01")
+                        .withPrice(BigDecimal.ONE)
+                        .withQuantity(2L)
+                        .build(),
+                new Item.ItemBuilder()
+                        .withId("02")
+                        .withPrice(BigDecimal.ZERO)
+                        .withQuantity(3L)
+                        .build(),
+                new Item.ItemBuilder()
+                        .withId("03")
+                        .withPrice(BigDecimal.TEN)
+                        .withQuantity(4L)
+                        .build());
     }
 
 }

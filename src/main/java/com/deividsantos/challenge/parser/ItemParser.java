@@ -23,20 +23,20 @@ class ItemParser {
     static List<Item> parse(String itemLine) {
         return Stream.of(itemLine)
                 .map(line -> asList(line.split(ITEM_LIST_SEPARATOR_REGEX)))
-                .map(buildEachItem())
+                .map(getEachItem())
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
 
-    private static Function<List<String>, List<Item>> buildEachItem() {
+    private static Function<List<String>, List<Item>> getEachItem() {
         return line -> line.stream()
                 .filter(item -> item.matches(ITEMS_REGEX))
                 .map(item -> item.split(ITEM_ATRIBUTES_SEPARATOR))
-                .map(build())
+                .map(buildItem())
                 .collect(Collectors.toList());
     }
 
-    private static Function<String[], Item> build() {
+    private static Function<String[], Item> buildItem() {
         return itemAtributes -> new Item.ItemBuilder()
                 .withId(itemAtributes[ID_INDEX])
                 .withQuantity(Long.valueOf(itemAtributes[QUANTITY_INDEX]))

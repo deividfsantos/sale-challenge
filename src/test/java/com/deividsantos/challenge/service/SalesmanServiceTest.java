@@ -20,58 +20,55 @@ public class SalesmanServiceTest {
 
     @Test
     public void getWorstSalesman() throws Exception {
-        assertEquals("030405020304", SalesmanService.getWorstSalesman(buildSalesmen(), buildSale()));
-        assertEquals("There are no salesmen.", SalesmanService.getWorstSalesman(new ArrayList<>(), new ArrayList<>()));
-        assertEquals("030405020304", SalesmanService.getWorstSalesman(buildSalesmen(), new ArrayList<>()));
-        assertEquals("There are no salesmen.", SalesmanService.getWorstSalesman(new ArrayList<>(), buildSale()));
+        assertEquals("CPF: 030405020304, Name: Teste, Salary: 10", SalesmanService.getWorstSalesmanString(buildSalesmen(), buildSale()));
+        assertEquals("There are no salesmen.", SalesmanService.getWorstSalesmanString(new ArrayList<>(), new ArrayList<>()));
+        assertEquals("CPF: 030405020304, Name: Teste, Salary: 10", SalesmanService.getWorstSalesmanString(buildSalesmen(), new ArrayList<>()));
+        assertEquals("There are no salesmen.", SalesmanService.getWorstSalesmanString(new ArrayList<>(), buildSale()));
 
     }
 
     private List<Salesman> buildSalesmen() {
-        Salesman salesman = new Salesman.SalesmanBuilder()
-                .withCpf("030405020304")
-                .withName("Teste")
-                .withSalary(BigDecimal.valueOf(10))
-                .build();
-        Salesman salesman1 = new Salesman.SalesmanBuilder()
-                .withCpf("130405020304")
-                .withName("Teste1")
-                .withSalary(BigDecimal.valueOf(10))
-                .build();
-        Salesman salesman2 = new Salesman.SalesmanBuilder()
-                .withCpf("230405020304")
-                .withName("Teste2")
-                .withSalary(BigDecimal.valueOf(10))
-                .build();
-        return asList(salesman, salesman1, salesman2);
+        return asList(new Salesman.SalesmanBuilder()
+                        .withCpf("030405020304")
+                        .withName("Teste")
+                        .withSalary(BigDecimal.valueOf(10))
+                        .build(),
+                new Salesman.SalesmanBuilder()
+                        .withCpf("130405020304")
+                        .withName("Teste1")
+                        .withSalary(BigDecimal.valueOf(10))
+                        .build(),
+                new Salesman.SalesmanBuilder()
+                        .withCpf("230405020304")
+                        .withName("Teste2")
+                        .withSalary(BigDecimal.valueOf(10))
+                        .build());
     }
 
     private List<Sale> buildSale() {
-        Sale sale1 = new Sale.SaleBuilder()
-                .withId("01")
-                .withSalesmanName("Teste1")
-                .withItems(builditems("10"))
-                .build();
-        Sale sale2 = new Sale.SaleBuilder()
-                .withId("02")
-                .withSalesmanName("Teste2")
-                .withItems(builditems("20"))
-                .build();
-        return asList(sale1, sale2);
+        return asList(new Sale.SaleBuilder()
+                        .withId("01")
+                        .withSalesmanName("Teste1")
+                        .withItems(builditems("10"))
+                        .build(),
+                new Sale.SaleBuilder()
+                        .withId("02")
+                        .withSalesmanName("Teste2")
+                        .withItems(builditems("20"))
+                        .build());
     }
 
     private List<Item> builditems(String name) {
-        Item item1 = new Item.ItemBuilder()
-                .withId(name)
-                .withPrice(new BigDecimal(name))
-                .withQuantity(Long.valueOf(name))
-                .build();
-        Item item2 = new Item.ItemBuilder()
-                .withId(name)
-                .withPrice(new BigDecimal(name).add(BigDecimal.valueOf(5)))
-                .withQuantity(Long.valueOf(name))
-                .build();
-        return asList(item1, item2);
+        return asList(new Item.ItemBuilder()
+                        .withId(name)
+                        .withPrice(new BigDecimal(name))
+                        .withQuantity(Long.valueOf(name))
+                        .build(),
+                new Item.ItemBuilder()
+                        .withId(name)
+                        .withPrice(new BigDecimal(name).add(BigDecimal.valueOf(5)))
+                        .withQuantity(Long.valueOf(name))
+                        .build());
     }
 
 }
