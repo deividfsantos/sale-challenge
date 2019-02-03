@@ -6,11 +6,11 @@ This project goal is read data from the default directory, located at **HOME_PAT
 
 The input file has the following pattern:
 - **Salesman data**<br>
-001çCPFçNameçSalary
+`001çCPFçNameçSalary`
 - **Customer data**<br>
-002çCNPJçNameçBusiness Area
+`002çCNPJçNameçBusiness Area`
 - **Sale data**<br>
-003çSale IDç[Item ID-Item Quantity-Item Price]çSalesman name
+`003çSale IDç[Item ID-Item Quantity-Item Price]çSalesman name`
 
 #### Test
 `./graldew clean test`
