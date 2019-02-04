@@ -1,11 +1,11 @@
 package com.deividsantos.challenge.parser;
 
 import com.deividsantos.challenge.model.Sale;
+import com.deividsantos.challenge.util.ParserTestUtil;
 import org.junit.Test;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.junit.Assert.assertEquals;
 
@@ -13,7 +13,7 @@ public class SaleParserTest {
 
     @Test
     public void parseSalesWithMiscLinesTest() {
-        List<Sale> sales = SaleParser.parse(buildLines());
+        List<Sale> sales = SaleParser.parse(ParserTestUtil.buildLines());
         assertEquals(2, sales.size());
         assertEquals("10", sales.get(0).getSaleId());
         assertEquals("Pedro", sales.get(0).getSalesmanName());
@@ -25,7 +25,7 @@ public class SaleParserTest {
 
     @Test
     public void parseSalesWithWrongLines() {
-        List<Sale> sales = SaleParser.parse(buildWrongLines());
+        List<Sale> sales = SaleParser.parse(ParserTestUtil.buildWrongLines());
         assertEquals(0, sales.size());
     }
 
@@ -43,18 +43,4 @@ public class SaleParserTest {
         assertEquals(0, sales.size());
     }
 
-    private List<String> buildLines() {
-        return asList(("001ç1234567891234çPedroç50000\n" +
-                "002ç2345675434544345çJose da SilvaçRural\n" +
-                "002ç2345675433444345çEduardo PereiraçRural\n" +
-                "003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çPedro\n" +
-                "003ç08ç[1-34-10,2-33-1.50,3-40-0.10]çPaulo").split("\n"));
-    }
-
-    private List<String> buildWrongLines() {
-        return asList(("dofhiofhieif\n" +
-                "002ç23gas456dssd7543454sf434safs5çgsagasgJose da SilvaçRural\n" +
-                "002ç2345sg6754ds33444345çEdafsguardo PereiraçRural\n" +
-                "003ç08sadç[1-34dsass-10,sddssd2da33-gdg-0.10]çPasddaulo").split("\n"));
-    }
 }
