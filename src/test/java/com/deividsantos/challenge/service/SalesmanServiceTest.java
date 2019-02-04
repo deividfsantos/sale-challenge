@@ -25,7 +25,6 @@ public class SalesmanServiceTest {
         assertEquals(Optional.empty(), SalesmanService.getWorstSalesman(new ArrayList<>(), new ArrayList<>()));
         assertEquals("CPF: 030405020304, Name: Teste, Salary: 10", SalesmanService.getWorstSalesman(buildSalesmen(), new ArrayList<>()).get().toString());
         assertEquals(Optional.empty(), SalesmanService.getWorstSalesman(new ArrayList<>(), buildSale()));
-
     }
 
     private List<Salesman> buildSalesmen() {
@@ -33,7 +32,7 @@ public class SalesmanServiceTest {
                         .withCpf("030405020304")
                         .withName("Teste")
                         .withSalary(BigDecimal.valueOf(10))
-                        .build(),
+                .build(),
                 new Salesman.Builder()
                         .withCpf("130405020304")
                         .withName("Teste1")
