@@ -9,9 +9,9 @@ public class SalesMain {
 
     public static void main(String[] args) {
         try {
-            EventService.watchAlreadyExistentFiles();
+            EventService.processAlreadyExistentFiles();
             Executors.newSingleThreadScheduledExecutor()
-                    .scheduleAtFixedRate(EventService::watchModifications, 0, 50, TimeUnit.MILLISECONDS);
+                    .scheduleAtFixedRate(EventService::processModifications, 0, 50, TimeUnit.MILLISECONDS);
         } catch (Exception e) {
             e.printStackTrace();
         }

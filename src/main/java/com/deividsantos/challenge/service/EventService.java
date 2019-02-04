@@ -16,7 +16,7 @@ public class EventService {
     private static MetricsService metricsService = new MetricsService();
     private static final String EMPTY_VALUE = "";
 
-    public static void watchAlreadyExistentFiles() {
+    public static void processAlreadyExistentFiles() {
         reader.listAlreadyExistentFiles()
                 .map(Path::getFileName)
                 .map(Path::toString)
@@ -25,7 +25,7 @@ public class EventService {
                 .forEach(EventService::process);
     }
 
-    public static void watchModifications() {
+    public static void processModifications() {
         new Watcher().watchEvents().stream()
                 .map(WatchEvent::context)
                 .map(Object::toString)
