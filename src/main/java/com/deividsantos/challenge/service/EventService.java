@@ -20,7 +20,7 @@ public class EventService {
         reader.listAlreadyExistentFiles()
                 .map(Path::getFileName)
                 .map(Path::toString)
-                .filter(file -> file.endsWith(Extension.INPUT.get()))
+                .filter(EventService::isCorrectExtension)
                 .map(EventService::getFileNameWithoutExtension)
                 .forEach(EventService::process);
     }
@@ -29,7 +29,7 @@ public class EventService {
         new Watcher().watchEvents().stream()
                 .map(WatchEvent::context)
                 .map(Object::toString)
-                .filter(event -> event.endsWith(Extension.INPUT.get()))
+                .filter(EventService::isCorrectExtension)
                 .map(EventService::getFileNameWithoutExtension)
                 .forEach(EventService::process);
     }
@@ -38,6 +38,10 @@ public class EventService {
         List<String> lines = reader.read(fileName);
         String metrics = metricsService.getMetrics(lines);
         writer.writeOutputFile(metrics, fileName);
+    }
+
+    private static boolean isCorrectExtension(String file) {
+        return file.endsWith(Extension.INPUT.get());
     }
 
     private static String getFileNameWithoutExtension(String fullFilename) {
