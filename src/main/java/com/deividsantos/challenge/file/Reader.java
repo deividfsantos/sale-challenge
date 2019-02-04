@@ -4,8 +4,11 @@ import com.deividsantos.challenge.type.Extension;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Reader extends FileBase {
 
@@ -19,5 +22,14 @@ public class Reader extends FileBase {
         }
     }
 
+    public Stream<Path> listAlreadyExistentFiles() {
+        Path path = FileSystems.getDefault().getPath(FILE_PATH_INPUT);
+        try {
+            return Files.list(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
 

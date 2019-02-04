@@ -8,7 +8,12 @@ import java.util.concurrent.TimeUnit;
 public class SalesMain {
 
     public static void main(String[] args) {
-        Executors.newSingleThreadScheduledExecutor()
-                .scheduleAtFixedRate(EventService::watch, 0, 100, TimeUnit.MILLISECONDS);
+        try {
+            EventService.watchAlreadyExistentFiles();
+            Executors.newSingleThreadScheduledExecutor()
+                    .scheduleAtFixedRate(EventService::watchModifications, 0, 100, TimeUnit.MILLISECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
