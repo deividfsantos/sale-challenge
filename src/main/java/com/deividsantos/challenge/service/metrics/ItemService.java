@@ -1,4 +1,4 @@
-package com.deividsantos.challenge.service;
+package com.deividsantos.challenge.service.metrics;
 
 import com.deividsantos.challenge.model.Item;
 

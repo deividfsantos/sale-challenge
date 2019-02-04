@@ -1,5 +1,6 @@
 package com.deividsantos.challenge.service;
 
+import com.deividsantos.challenge.service.metrics.SalesmanService;
 import com.deividsantos.challenge.util.ServiceTestUtil;
 import org.junit.Test;
 

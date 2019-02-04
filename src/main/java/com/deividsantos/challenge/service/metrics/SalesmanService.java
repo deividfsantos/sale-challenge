@@ -1,4 +1,4 @@
-package com.deividsantos.challenge.service;
+package com.deividsantos.challenge.service.metrics;
 
 import com.deividsantos.challenge.model.Sale;
 import com.deividsantos.challenge.model.Salesman;
@@ -8,13 +8,13 @@ import java.util.Optional;
 
 import static java.util.Comparator.comparing;
 
-class SalesmanService {
+public class SalesmanService {
 
-    static Integer getAmountOfSalesman(List<Salesman> salesmen) {
+    public static Integer getAmountOfSalesman(List<Salesman> salesmen) {
         return salesmen.size();
     }
 
-    static Optional<Salesman> getWorstSalesman(List<Salesman> salesmen, List<Sale> sales) {
+    public static Optional<Salesman> getWorstSalesman(List<Salesman> salesmen, List<Sale> sales) {
         return salesmen.stream()
                 .min(comparing(salesman -> SaleService.sumSalesFromSalesman(salesman, sales)));
     }

@@ -7,10 +7,13 @@ import com.deividsantos.challenge.model.Salesman;
 import com.deividsantos.challenge.parser.CustomerParser;
 import com.deividsantos.challenge.parser.SaleParser;
 import com.deividsantos.challenge.parser.SalesmanParser;
+import com.deividsantos.challenge.service.metrics.CustomerService;
+import com.deividsantos.challenge.service.metrics.SaleService;
+import com.deividsantos.challenge.service.metrics.SalesmanService;
 
 import java.util.List;
 
-class MetricsService {
+public class MetricsService {
     String getMetrics(List<String> lines) {
         return build(CustomerParser.parse(lines),
                 SalesmanParser.parse(lines),

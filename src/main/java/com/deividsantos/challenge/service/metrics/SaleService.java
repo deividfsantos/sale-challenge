@@ -1,4 +1,4 @@
-package com.deividsantos.challenge.service;
+package com.deividsantos.challenge.service.metrics;
 
 import com.deividsantos.challenge.model.Sale;
 import com.deividsantos.challenge.model.Salesman;
@@ -9,8 +9,8 @@ import java.util.Optional;
 
 import static java.util.Comparator.comparing;
 
-class SaleService {
-    static Optional<Sale> getMostExpensiveSale(List<Sale> sales) {
+public class SaleService {
+    public static Optional<Sale> getMostExpensiveSale(List<Sale> sales) {
         return sales.stream().max(comparing(SaleService::sumSaleItemsValue));
     }
 
