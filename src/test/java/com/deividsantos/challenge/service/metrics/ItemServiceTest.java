@@ -1,6 +1,5 @@
-package com.deividsantos.challenge.service;
+package com.deividsantos.challenge.service.metrics;
 
-import com.deividsantos.challenge.service.metrics.ItemService;
 import com.deividsantos.challenge.util.ServiceTestUtil;
 import org.junit.Test;
 
@@ -11,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ItemServiceTest {
     @Test
-    public void sumSaleItemsValueTest() throws Exception {
+    public void sumSaleItemsValueTest() {
         assertEquals(BigDecimal.valueOf(42), ItemService.sumValues(ServiceTestUtil.buildItems()));
         assertEquals(BigDecimal.valueOf(0), ItemService.sumValues(new ArrayList<>()));
     }

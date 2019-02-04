@@ -13,7 +13,7 @@ import com.deividsantos.challenge.service.metrics.SalesmanService;
 
 import java.util.List;
 
-public class MetricsService {
+class MetricsService {
     String getMetrics(List<String> lines) {
         return build(CustomerParser.parse(lines),
                 SalesmanParser.parse(lines),
