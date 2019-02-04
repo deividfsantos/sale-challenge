@@ -11,7 +11,7 @@ public class SalesMain {
         try {
             EventService.watchAlreadyExistentFiles();
             Executors.newSingleThreadScheduledExecutor()
-                    .scheduleAtFixedRate(EventService::watchModifications, 0, 100, TimeUnit.MILLISECONDS);
+                    .scheduleAtFixedRate(EventService::watchModifications, 0, 50, TimeUnit.MILLISECONDS);
         } catch (Exception e) {
             e.printStackTrace();
         }

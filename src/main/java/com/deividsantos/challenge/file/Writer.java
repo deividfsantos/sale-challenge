@@ -15,13 +15,17 @@ public class Writer extends FileBase {
         File flatFile = new File(FILE_PATH_OUTPUT + fileName + Extension.OUTPUT.get());
         Path path = flatFile.toPath();
         try {
-            Files.createFile(flatFile.toPath());
+            createFile(flatFile);
             write(line, path);
         } catch (FileAlreadyExistsException e) {
             write(line, path);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void createFile(File flatFile) throws IOException {
+        Files.createFile(flatFile.toPath());
     }
 
     private void write(String lines, Path path) {
