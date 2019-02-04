@@ -34,4 +34,7 @@ It should summarize the following data:
 - **Gradle 3.5**: To automate the build.
 
 
-This project uses principles of functional programming with JAVA, trying to apply some of it concepts and good practices.
+This project uses principles of functional programming with JAVA, trying to apply some of it concepts and good practices. The incorrect lines in the input file will be ignored.
+
+#### Application Flow
+![alt text](https://i.imgur.com/rFBWRRK.png)
