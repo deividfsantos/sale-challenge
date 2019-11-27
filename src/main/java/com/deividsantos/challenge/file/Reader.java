@@ -1,6 +1,8 @@
 package com.deividsantos.challenge.file;
 
 import com.deividsantos.challenge.type.Extension;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,12 +15,14 @@ import java.util.stream.Stream;
 
 public class Reader extends FileBase {
 
+    private static final Logger logger = LogManager.getLogger(Reader.class);
+
     public List<String> read(String fileName) {
         File flatFile = new File(FILE_PATH_INPUT + fileName + Extension.INPUT.get());
         try {
             return Files.readAllLines(flatFile.toPath());
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("There was an error reading file {}.", fileName, e);
             return new ArrayList<>();
         }
     }
@@ -28,7 +32,7 @@ public class Reader extends FileBase {
         try {
             return Files.list(path);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("An error occurred while listing existing files.", e);
             return Stream.empty();
         }
     }
