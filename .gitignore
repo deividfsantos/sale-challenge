@@ -6,7 +6,7 @@
 *.tar.gz
 *.rar
 *.iml
-
+logs
 .idea
 out
 .gradle
